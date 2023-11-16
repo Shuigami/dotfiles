@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+x=$(xrandr --listmonitors | head -n 1 | cut -c 11)
+x=$((x-1))
+
+echo "$x"

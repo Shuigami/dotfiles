@@ -1,0 +1,15 @@
+#!/bin/sh
+
+status=$(ip r)
+
+symbol() {
+    [ "$status" != "" ] && echo  && exit
+    echo 󰤮
+}
+
+name() {
+    echo "Connected to $(iwgetid -r)"
+}
+
+[ "$1" = "icon" ] && symbol && exit
+[ "$1" = "name" ] && name && exit

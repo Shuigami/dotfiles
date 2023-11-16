@@ -1,0 +1,90 @@
+.bar {
+    background: rgba(255, 255, 255, 0)
+}
+.occupied {
+    label {
+        padding-right: 5px;
+    }
+}
+label {
+    color: #7169b5;
+}
+.border {
+    border: 2px solid #7169b5;
+    border-radius: 10px;
+    background: rgb(43, 34, 98, 0.8);
+}
+
+.workspace-entry {
+    label {
+        margin: 0px 10px 0px 10px;
+    }
+}
+
+.clock {
+    margin: 0 20px;
+}
+.low-battery {
+    label {
+        color: #ff5e5e;
+        margin: 0px 20px 0px 20px;
+    }
+    border: 2px solid #ff5e5e;
+    border-radius: 10px;
+    background: rgba(128, 47, 47, 0.8)
+}
+
+
+.right-part {
+}
+.wifi-icon {
+    label {
+        margin: 0px 20px 0px 10px;
+    }
+}
+
+.battery {
+    .battery-num {
+        font-size: 12px;
+    }
+    margin-left: -7px;
+    padding: 0 10px
+}
+.battery-low {
+    label {
+        color: #ff5e5e;
+    }
+}
+.battery-charging {
+    label {
+        color: #4bcc7c;
+    }
+}
+.light {
+    .light-num {
+        font-size: 12px;
+    }
+    margin-left: -7px;
+    padding: 0 10px
+}
+.sound {
+    .sound-num {
+        font-size: 12px;
+        margin-left: 2px;
+    }
+    margin-left: 4px;
+    padding: 0 10px;
+}
+.disable {
+    label {
+        color: #453795;
+        transition: color 0.5s ease-in-out;
+    }
+    margin-right: -2px;
+}
+.enable {
+    label {
+        transition: color 0.5s ease-in-out;
+    }
+    margin-left: -6px;
+}
