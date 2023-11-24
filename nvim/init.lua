@@ -28,6 +28,7 @@ Plug 'ms-jpq/coq_nvim'
 Plug 'ms-jpq/coq.artifacts'
 
 Plug 'ms-jpq/coq.thirdparty'
+Plug 'neoclide/coc.nvim'
 
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
