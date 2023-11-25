@@ -2,6 +2,8 @@
 (deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
 (deflisten current_workspace :initial "0" "bash ~/.config/eww/scripts/get-active-workspace")
 (defpoll title :interval "0.1s" "scripts/music --title")
+(defpoll artist :interval "0.1s" "scripts/music --artist")
+(defpoll position :interval "0.1s" "scripts/music --position")
 (defpoll cover :interval "0.1s" "scripts/music --art")
 (defpoll music-status :interval "0.1s" "scripts/music --status")
 

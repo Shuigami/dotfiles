@@ -1,15 +1,9 @@
+// ----------------================ BAR ================---------------- //
+* { all: unset; }
+
 .bar {
     background: rgba(255, 255, 255, 0);
     margin: 0 0.5rem;
-}
-
-.left-part {
-    min-width: 10rem;
-}
-.occupied {
-    label {
-        padding-right: 5px;
-    }
 }
 label {
     font-size: 18px;
@@ -21,11 +15,36 @@ label {
     background: rgb(43, 34, 98, 0.8);
 }
 
+// ----------------================ LEFT-PART ================---------------- //
+.occupied {
+    label {
+        padding-right: 5px;
+    }
+}
 .workspace-entry {
     label {
         margin: 0px 10px 0px 10px;
     }
 }
+
+// ----------------================ MIDDLE-PART ================---------------- //
+.clock {
+    margin: 0 20px;
+}
+.low-battery {
+    label {
+        color: #ff5e5e;
+        margin: 0px 20px 0px 20px;
+    }
+    border: 2px solid #ff5e5e;
+    border-radius: 10px;
+    background: rgba(128, 47, 47, 0.8)
+}
+
+
+// ----------------================ RIGHT-PART ================---------------- //
+
+// Music
 .music {
     margin: 0 20px;
     background: rgb(43, 34, 98, 1);
@@ -51,31 +70,13 @@ label {
     margin: 5px 20px 5px 0px;
 }
 
-.clock {
-    margin: 0 20px;
-}
-.low-battery {
-    label {
-        color: #ff5e5e;
-        margin: 0px 20px 0px 20px;
-    }
-    border: 2px solid #ff5e5e;
-    border-radius: 10px;
-    background: rgba(128, 47, 47, 0.8)
-}
-
-
-.right-part {
-}
-.wifi-icon {
-    label {
-        margin: 0px 20px 0px 10px;
-    }
-}
-
+// Battery
 .battery {
-    margin-left: -7px;
-    padding: 0 10px
+    margin-left: 10px;
+    margin-right: 13px;
+    label {
+        margin-left: 10px;
+    }
 }
 .battery-low {
     label {
@@ -87,28 +88,79 @@ label {
         color: #4bcc7c;
     }
 }
-.light {
-    margin-left: -7px;
-    padding: 0 10px
-}
+
+// Sound
 .sound {
-    .sound-num {
-        font-size: 17px;
-        margin-left: 2px;
+    margin-left: 15px;
+    margin-right: 11px;
+    > label {
+        margin-right: 15px;
     }
-    margin-left: 4px;
-    padding: 0 10px;
 }
 .disable {
     label {
         color: #453795;
         transition: color 0.5s ease-in-out;
     }
-    margin-right: -2px;
+    > label {
+        margin-right: 11px;
+    }
 }
 .enable {
     label {
         transition: color 0.5s ease-in-out;
     }
-    margin-left: -6px;
+}
+
+// Light
+.light {
+    margin: 0 16px 0 18px;
+}
+.light-num {
+    margin-left: 12px;
+}
+
+// Wifi
+.wifi-icon {
+    margin: 0px 30px 0px 18px;
+}
+
+// ----------------================ POPUP ================---------------- //
+.music-popup {
+    border-radius: 20px;
+    background: rgb(43, 34, 98, 1);
+    .cover {
+        margin-top: 50px;
+        min-height: 200px;
+    }
+}
+.music-popup-bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.10; 
+}
+.music-popup-content {
+    scale {
+        margin-top: 4em;
+    }
+    scale trough highlight {
+        border: 2px solid #7169b5;
+        border-radius: 10px;
+    }
+    scale trough {
+        background: rgb(43, 34, 98, 1);
+        border: 2px solid #7169b5;
+        border-radius: 10px;
+        min-height: 3px;
+        min-width: 50px;
+        margin: 0 40px;
+    }
+}
+.music-popup-title {
+    margin-top: 1em;
+    font-size: 2em;
+}
+.music-popup-artist {
+    margin-top: 1em;
 }

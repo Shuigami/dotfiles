@@ -1,0 +1,40 @@
+(defwidget music-popup [] 
+  (box :class "music-popup"
+    (box :class "container border"
+      (overlay
+        (box :class "music-popup-bg"
+             :css ".music-popup-bg { background-image: url('${cover}'); }"
+        )
+        (box :class "music-popup-content"
+             :valign "start"
+             :orientation "v"
+             :space-evenly false
+          (cover)
+          (music-button)
+          (scale :min 0
+                 :max 101
+                 :active true
+                 :value position
+          )
+          (label :class "music-popup-title" :text "${title}")
+          (label :class "music-popup-artist" :text "${artist}")
+        )
+      )
+    )
+  )
+)
+(defwidget music-button []
+  (box :class "music-button"
+  )
+)
+
+(defwindow music-popup-window
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "395px"
+                      :y "5px"
+                      :width "19.2%"
+                      :height "500px"
+                      :anchor "top right")
+  (music-popup)
+)

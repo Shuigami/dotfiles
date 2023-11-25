@@ -82,10 +82,11 @@
 )
 
 (defwidget music []
-    (box        :orientation "h"
-                :class "music border"
-                :halign "end"
-                :space-evenly false
+    (eventbox        :orientation "h"
+                     :class "music border"
+                     :halign "end"
+                     :space-evenly false
+                     :onclick "bash ~/.config/eww/scripts/launch-popup-music --toggle-music"
         (overlay
             (box        :orientation "h"
                         :space-evenly false
@@ -121,6 +122,7 @@
 (defwidget battery []
     (box        :orientation "h"
                 :class "battery ${battery-charging == "Charging" ? "battery-charging" : battery-num <= 10 ? "battery-low" : "" }"
+                :space-evenly false
         (box :visible {battery-charging == "Charging"}
             (revealer :transition "slideright" :reveal {battery-charging == "Charging"} :duration 200
                 (label :class "charging" :text "󱐋")
@@ -137,6 +139,7 @@
 (defwidget light []
     (box        :orientation "h"
                 :class "light"
+                :space-evenly false
         (label :text "${light-icon}")
         (label :class "light-num" :text "${light-num}%")
     )
@@ -145,6 +148,7 @@
     (eventbox :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
         (box        :orientation "h"
                     :class "sound ${sound-icon == "󰝟" ? "disable" : "enable" }"
+                    :space-evenly false
             (label :text "${sound-icon}")
             (revealer :transition "slideright" :reveal {sound-icon != "󰝟"} :duration 200
                 (label :class "sound-num" :text "${sound-num}")
