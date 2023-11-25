@@ -33,6 +33,7 @@ Plug 'neoclide/coc.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
+Plug 'elkowar/yuck.vim'
 
 vim.call('plug#end')
 

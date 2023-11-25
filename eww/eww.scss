@@ -8,6 +8,7 @@
 label {
     font-size: 18px;
     color: #7169b5;
+    transition: color 0.2s ease-in-out;
 }
 .border {
     border: 2px solid #7169b5;
@@ -46,7 +47,7 @@ label {
 
 // Music
 .music {
-    margin: 0 20px;
+    margin-right: 20px;
     background: rgb(43, 34, 98, 1);
     label {
         color: #918bc6;
@@ -100,15 +101,9 @@ label {
 .disable {
     label {
         color: #453795;
-        transition: color 0.5s ease-in-out;
     }
     > label {
         margin-right: 11px;
-    }
-}
-.enable {
-    label {
-        transition: color 0.5s ease-in-out;
     }
 }
 
@@ -130,7 +125,7 @@ label {
     border-radius: 20px;
     background: rgb(43, 34, 98, 1);
     .cover {
-        margin-top: 50px;
+        margin: 30px 50px 0px 50px;
         min-height: 200px;
     }
 }
@@ -142,7 +137,6 @@ label {
 }
 .music-popup-content {
     scale {
-        margin-top: 4em;
     }
     scale trough highlight {
         border: 2px solid #7169b5;
@@ -163,4 +157,25 @@ label {
 }
 .music-popup-artist {
     margin-top: 1em;
+}
+.music-buttons {
+    margin-right: 5px;
+    margin-top: 1em;
+    label {
+        padding-top: 20px;
+        font-size: 2em;
+    }
+}
+.music-button {
+    margin-right: 5px;
+    label {
+        font-size: 5em;
+        padding: 0 20px;
+    }
+}
+.button-desactive {
+    color: #433d7b;
+}
+.hover {
+    color: #918bc6;
 }

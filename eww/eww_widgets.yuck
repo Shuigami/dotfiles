@@ -82,11 +82,12 @@
 )
 
 (defwidget music []
-    (eventbox        :orientation "h"
-                     :class "music border"
-                     :halign "end"
-                     :space-evenly false
-                     :onclick "bash ~/.config/eww/scripts/launch-popup-music --toggle-music"
+    (box        :orientation "h"
+                :class "music border"
+                :halign "end"
+                :space-evenly false
+      (eventbox :space-evenly false
+                :onclick "eww open music-popup-closer && eww open music-popup-window"
         (overlay
             (box        :orientation "h"
                         :space-evenly false
@@ -100,6 +101,7 @@
                         :css ".cover-bg { background-image: url('${cover}'); }"
             )
         )
+      )
     )
 )
 (defwidget cover []
@@ -109,14 +111,6 @@
         (box        :class "cover"
                     :css ".cover { background-image: url('${cover}'); }"
         )
-    )
-)
-(defwidget wifi []
-    (box        :orientation "v"  
-                :tooltip wifi-name
-                :class "wifi-icon"
-                :tooltip "${wifi-name}"
-        (label :text "${wifi-icon}")
     )
 )
 (defwidget battery []
@@ -136,14 +130,6 @@
         (label :class "battery-num" :text "${battery-num}%")
     )
 )
-(defwidget light []
-    (box        :orientation "h"
-                :class "light"
-                :space-evenly false
-        (label :text "${light-icon}")
-        (label :class "light-num" :text "${light-num}%")
-    )
-)
 (defwidget sound []
     (eventbox :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
         (box        :orientation "h"
@@ -154,5 +140,21 @@
                 (label :class "sound-num" :text "${sound-num}")
             )
         )
+    )
+)
+(defwidget light []
+    (box        :orientation "h"
+                :class "light"
+                :space-evenly false
+        (label :text "${light-icon}")
+        (label :class "light-num" :text "${light-num}%")
+    )
+)
+(defwidget wifi []
+    (box        :orientation "v"  
+                :tooltip wifi-name
+                :class "wifi-icon"
+                :tooltip "${wifi-name}"
+        (label :text "${wifi-icon}")
     )
 )

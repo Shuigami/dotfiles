@@ -1,11 +1,18 @@
 ;; ----------------================ LEFT-PART ================---------------- ;;
 (deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
 (deflisten current_workspace :initial "0" "bash ~/.config/eww/scripts/get-active-workspace")
-(defpoll title :interval "0.1s" "scripts/music --title")
-(defpoll artist :interval "0.1s" "scripts/music --artist")
-(defpoll position :interval "0.1s" "scripts/music --position")
-(defpoll cover :interval "0.1s" "scripts/music --art")
-(defpoll music-status :interval "0.1s" "scripts/music --status")
+(defpoll title :interval "1s" "scripts/music --title")
+(defpoll artist :interval "1s" "scripts/music --artist")
+(defpoll position :interval "1s" "scripts/music --position")
+(defpoll cover :interval "1s" "scripts/music --art")
+(defpoll music-status :interval "1s" "scripts/music --status")
+(defpoll loop-status :interval "1s" "scripts/music --loop-status")
+(defpoll shuffle-status :interval "1s" "scripts/music --shuffle-status")
+(defvar loop-hover "false")
+(defvar prev-hover "false")
+(defvar status-hover "false")
+(defvar next-hover "false")
+(defvar shuffle-hover "false")
 
 ;; ----------------================ MIDDLE-PART ================---------------- ;;
 (defpoll time :interval "30s" "scripts/time")

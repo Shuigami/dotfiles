@@ -15,6 +15,7 @@
                  :max 101
                  :active true
                  :value position
+                 :onchange "bash ~/.config/eww/scripts/music --set-position {}"
           )
           (label :class "music-popup-title" :text "${title}")
           (label :class "music-popup-artist" :text "${artist}")
@@ -24,7 +25,34 @@
   )
 )
 (defwidget music-button []
-  (box :class "music-button"
+  (centerbox :class "music-buttons"
+    (eventbox :onclick "bash ~/.config/eww/scripts/music --loop"
+              :onhover "eww update loop-hover='true'"
+              :onhoverlost "eww update loop-hover='false'"
+      (label :class "music-loop ${loop-status ? "" : "button-desactive"} ${loop-hover ? "hover" : ""}" :text "󰑐")
+    )
+    (centerbox :class "music-button"
+      (eventbox :onclick "bash ~/.config/eww/scripts/music --prev"
+                :onhover "eww update prev-hover='true'"
+                :onhoverlost "eww update prev-hover='false'"
+        (label :class "music-prev ${prev-hover ? "hover" : ""}" :text "󰙣")
+      )
+      (eventbox :onclick "bash ~/.config/eww/scripts/music --toggle"
+                :onhover "eww update status-hover='true'"
+                :onhoverlost "eww update status-hover='false'"
+        (label :class "music-status ${status-hover ? "hover" : ""}" :text "${music-status ? '󰏥' : '󰐌'}")
+      )
+      (eventbox :onclick "bash ~/.config/eww/scripts/music --next"
+                :onhover "eww update next-hover='true'"
+                :onhoverlost "eww update next-hover='false'"
+        (label :class "music-next ${next-hover ? "hover" : ""}" :text "󰙡")
+      )
+    )
+    (eventbox :onclick "bash ~/.config/eww/scripts/music --shuffle"
+              :onhover "eww update shuffle-hover='true'"
+              :onhoverlost "eww update shuffle-hover='false'"
+        (label :class "music-shuffle ${shuffle-status ? "" : "button-desactive"} ${shuffle-hover ? "hover" : ""}" :text "󰒟")
+    )
   )
 )
 
@@ -34,7 +62,18 @@
   :geometry (geometry :x "395px"
                       :y "5px"
                       :width "19.2%"
-                      :height "500px"
+                      :height "480px"
                       :anchor "top right")
+  :stacking "fg"
   (music-popup)
 )
+
+(defwidget closer [window]
+  (eventbox :onclick "eww close ${window}-window && eww close ${window}-closer"))
+ 
+(defwindow music-popup-closer
+  :monitor 0
+  :geometry (geometry :width "100%" :height "100%")
+  :stacking "fg"
+  :focusable false
+  (closer :window "music-popup"))

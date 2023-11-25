@@ -59,6 +59,18 @@ music_prev() {
     playerctl previous --no-messages
 }
 
+set_music_position() {
+    if [ "$(playerctl status --no-messages)" == "Playing" ]; then
+        length=$((`playerctl metadata | grep length | awk '{print $3}'` / 1000000))
+        position=$(playerctl position | awk '{printf("%d\n", $1)}')
+        diff=$(($length * $1 / 100))
+        playerctl position "$diff"
+        return
+    fi
+    
+    echo 0
+}
+
 get_music_position() {
     if [ "$(playerctl status --no-messages)" == "Playing" ]; then
         length=$((`playerctl metadata | grep length | awk '{print $3}'` / 1000000))
@@ -72,7 +84,7 @@ get_music_position() {
 
 loop_toggle() {
     if [ "$(playerctl loop)" == "Playlist" ]; then
-        playerctl loop track
+        playerctl loop none
     else
         playerctl loop playlist
     fi
@@ -80,6 +92,18 @@ loop_toggle() {
 
 get_loop_status() {
     if [ "$(playerctl loop)" == "Playlist" ]; then
+        echo "true"
+    else
+        echo "false"
+    fi
+} 
+
+shuffle_toggle() {
+    playerctl shuffle toggle
+}
+
+get_shuffle_status() {
+    if [ "$(playerctl shuffle)" == "Off" ]; then
         echo "false"
     else
         echo "true"
@@ -96,8 +120,11 @@ case "$1" in
     "--next"        ) music_next ;;
     "--prev"        ) music_prev ;;
     "--position"    ) get_music_position ;;
+    "--set-position"    ) set_music_position $2;;
     "--loop"        ) loop_toggle ;;
-    "--loop_status" ) get_loop_status ;;
+    "--loop-status" ) get_loop_status ;;
+    "--shuffle"        ) shuffle_toggle ;;
+    "--shuffle-status" ) get_shuffle_status ;;
 esac
 
 
