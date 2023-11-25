@@ -1,0 +1,20 @@
+;; ----------------================ LEFT-PART ================---------------- ;;
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
+(deflisten current_workspace :initial "0" "bash ~/.config/eww/scripts/get-active-workspace")
+(defpoll title :interval "0.1s" "scripts/music --title")
+(defpoll cover :interval "0.1s" "scripts/music --art")
+(defpoll music-status :interval "0.1s" "scripts/music --status")
+
+;; ----------------================ MIDDLE-PART ================---------------- ;;
+(defpoll time :interval "30s" "scripts/time")
+
+;; ----------------================ RIGHT-PART ================---------------- ;;
+(defpoll wifi-icon :interval "1s" "scripts/wifi icon")
+(defpoll wifi-name :interval "1s" "scripts/wifi name")
+(defpoll battery-icon :interval "1s" "scripts/battery icon")
+(defpoll battery-num :interval "1s" "scripts/battery num")
+(defpoll battery-charging :interval "1s" "scripts/battery charging")
+(defpoll light-icon :interval "100ms" "scripts/light icon")
+(defpoll light-num :interval "100ms" "scripts/light num")
+(defpoll sound-num :interval "100ms" "scripts/sound num")
+(defpoll sound-icon :interval "100ms" "scripts/sound icon")

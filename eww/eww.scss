@@ -2,6 +2,7 @@
     background: rgba(255, 255, 255, 0);
     margin: 0 0.5rem;
 }
+
 .left-part {
     min-width: 10rem;
 }
@@ -26,14 +27,14 @@ label {
     }
 }
 .music {
-    margin-left: 20px;
+    margin: 0 20px;
     background: rgb(43, 34, 98, 1);
     label {
         color: #918bc6;
     }
 }
 .music-inside {
-    margin-right: 20px;
+    margin: 0px 20px;
 }
 .cover-bg {
     background-repeat: no-repeat;
@@ -47,7 +48,7 @@ label {
     background-position: center center;
     min-height: 40px;
     min-width: 40px;
-    margin: 5px 20px 5px 10px;
+    margin: 5px 20px 5px 0px;
 }
 
 .clock {

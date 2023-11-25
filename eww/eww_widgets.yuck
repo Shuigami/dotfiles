@@ -1,0 +1,150 @@
+;; ----------------================ BAR ================---------------- ;;
+(defwidget bar []
+    (centerbox :class "bar"
+        (left-part)
+        (middle-part)
+        (right-part)
+    )
+)
+
+;; ----------------================ LEFT-PART ================---------------- ;;
+(defwidget left-part []
+    (box        :orientation "h"
+                :halign "start"
+                :space-evenly false
+                :class "left-part"
+        (workspaces)
+        (music)
+    )
+)
+
+(defwidget workspaces []
+    (eventbox   :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}"
+                :halign "start"
+                :class "workspaces-widget border"
+        (box :space-evenly true
+            (for workspace in workspaces
+                (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+                    (box :class "workspace-entry ${workspace.id == current_workspace ? "current" : workspace.windows > 0 ? "occupied" : "empty"}" :width 50
+                        (label :text "${workspace.id == current_workspace ? "" : workspace.windows > 0 ? "" : ""}")
+                    )
+                )
+            )
+        )
+    )
+)
+
+(defwidget music []
+    (box        :orientation "h"
+                :class "music border"
+        (overlay
+            (box        :orientation "h"
+                        :halign "start"
+                        :space-evenly false
+                        :class "music-inside"
+                (cover)
+                (label :text "${title}")
+            )
+            (box        :orientation "h"
+                        :space-evenly false
+                        :class "cover-bg"
+                        :css ".cover-bg { background-image: url('${cover}'); }"
+            )
+        )
+    )
+)
+(defwidget cover []
+    (revealer   :transition "slideleft"
+                :reveal {music-status}
+                :duration 200
+        (box        :class "cover"
+                    :css ".cover { background-image: url('${cover}'); }"
+        )
+    )
+)
+
+;; ----------------================ MIDDLE-PART ================---------------- ;;
+(defwidget middle-part []
+    (box        :orientation "h"
+                :halign "center"
+                :class "middle-part border"
+                :space-evenly false
+        (clock)
+        (low-battery)
+    )
+)
+
+(defwidget clock []
+    (box        :orientation "h"
+                :halign "center"
+                :class "clock"
+                :space-evenly false
+        (label :text "${time}")
+    )
+)
+(defwidget low-battery []
+    (revealer   :transition "slideleft"
+                :reveal {battery-charging == "Discharging" && battery-num <= 10}
+                :duration 200
+        (box        :class "low-battery" 
+                    :halign "center"
+            (label :text "BRANCHE MOI BATARD")
+        )
+    )
+)
+
+;; ----------------================ RIGHT-PART ================---------------- ;;
+(defwidget right-part []
+    (box        :orientation "h"
+                :halign "end"
+                :class "right-part border"
+                :space-evenly false
+        (battery) "|"
+        (sound) "|"
+        (light) "|"
+        (wifi)
+    )
+)
+
+(defwidget wifi []
+    (box        :orientation "v"  
+                :tooltip wifi-name
+                :class "wifi-icon"
+                :tooltip "${wifi-name}"
+        (label :text "${wifi-icon}")
+    )
+)
+(defwidget battery []
+    (box        :orientation "h"
+                :class "battery ${battery-charging == "Charging" ? "battery-charging" : battery-num <= 10 ? "battery-low" : "" }"
+        (box :visible {battery-charging == "Charging"}
+            (revealer :transition "slideright" :reveal {battery-charging == "Charging"} :duration 200
+                (label :class "charging" :text "󱐋")
+            )
+        )
+        (box :visible {battery-charging != "Charging"}
+            (revealer :transition "slideright" :reveal {battery-charging != "Charging"} :duration 200
+                (label :text "${battery-icon}")
+            )
+        )
+        (label :class "battery-num" :text "${battery-num}%")
+    )
+)
+(defwidget light []
+    (box        :orientation "h"
+                :class "light"
+        (label :text "${light-icon}")
+        (label :class "light-num" :text "${light-num}%")
+    )
+)
+(defwidget sound []
+    (eventbox :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        (box        :orientation "h"
+                    :class "sound ${sound-icon == "󰝟" ? "disable" : "enable" }"
+            (label :text "${sound-icon}")
+            (revealer :transition "slideright" :reveal {sound-icon != "󰝟"} :duration 200
+                (label :class "sound-num" :text "${sound-num}")
+            )
+        )
+    )
+)
