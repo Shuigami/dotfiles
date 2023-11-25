@@ -14,7 +14,6 @@
                 :space-evenly false
                 :class "left-part"
         (workspaces)
-        (music)
     )
 )
 
@@ -34,34 +33,6 @@
     )
 )
 
-(defwidget music []
-    (box        :orientation "h"
-                :class "music border"
-        (overlay
-            (box        :orientation "h"
-                        :halign "start"
-                        :space-evenly false
-                        :class "music-inside"
-                (cover)
-                (label :text "${title}")
-            )
-            (box        :orientation "h"
-                        :space-evenly false
-                        :class "cover-bg"
-                        :css ".cover-bg { background-image: url('${cover}'); }"
-            )
-        )
-    )
-)
-(defwidget cover []
-    (revealer   :transition "slideleft"
-                :reveal {music-status}
-                :duration 200
-        (box        :class "cover"
-                    :css ".cover { background-image: url('${cover}'); }"
-        )
-    )
-)
 
 ;; ----------------================ MIDDLE-PART ================---------------- ;;
 (defwidget middle-part []
@@ -97,15 +68,48 @@
 (defwidget right-part []
     (box        :orientation "h"
                 :halign "end"
-                :class "right-part border"
-                :space-evenly false
-        (battery) "|"
-        (sound) "|"
-        (light) "|"
-        (wifi)
+        (music)
+        (box        :orientation "h"
+                    :halign "end"
+                    :class "right-part border"
+                    :space-evenly false
+            (battery) "|"
+            (sound) "|"
+            (light) "|"
+            (wifi)
+        )
     )
 )
 
+(defwidget music []
+    (box        :orientation "h"
+                :class "music border"
+                :halign "end"
+                :space-evenly false
+        (overlay
+            (box        :orientation "h"
+                        :space-evenly false
+                        :class "music-inside"
+                (cover)
+                (label :text "${title}")
+            )
+            (box        :orientation "h"
+                        :space-evenly false
+                        :class "cover-bg"
+                        :css ".cover-bg { background-image: url('${cover}'); }"
+            )
+        )
+    )
+)
+(defwidget cover []
+    (revealer   :transition "slideleft"
+                :reveal {music-status}
+                :duration 200
+        (box        :class "cover"
+                    :css ".cover { background-image: url('${cover}'); }"
+        )
+    )
+)
 (defwidget wifi []
     (box        :orientation "v"  
                 :tooltip wifi-name

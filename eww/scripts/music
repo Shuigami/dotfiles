@@ -2,8 +2,8 @@
 get_music_title() {
     if [ "$(playerctl status)" == "Playing" ]; then
         title=$(playerctl metadata --format '{{title}}')
-        if [ ${#title} -gt 16 ]; then
-            title=$(echo "$title" | sed 's/^\(.\{16\}\).*/\1.../')
+        if [ ${#title} -gt 20 ]; then
+            title=$(echo "$title" | sed 's/^\(.\{20\}\).*/\1.../')
         fi
         echo "$title"
     else
