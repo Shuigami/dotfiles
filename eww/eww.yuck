@@ -1,5 +1,5 @@
 (defwidget bar []
-    (box        :orientation "h"
+    (box        :orientation "h" :class "bar"
         (left-part)
         (middle-part)
         (right-part)
@@ -9,7 +9,10 @@
 (defwidget left-part []
     (box        :orientation "h"
                 :halign "start"
+                :space-evenly false
+                :class "left-part"
         (workspaces)
+        (music)
     )
 )
 
@@ -17,6 +20,7 @@
 (deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
 (defwidget workspaces []
     (eventbox   :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}"
+                :halign "start"
                 :class "workspaces-widget border"
         (box :space-evenly true
             (for workspace in workspaces
@@ -29,6 +33,35 @@
         )
     )
 )
+
+(defwidget music []
+    (box        :orientation "h"
+                :class "music border"
+                :halign "start"
+                :space-evenly false
+        (overlay
+            (box        :orientation "h"
+                        :halign "start"
+                        :space-evenly false
+                        :class "music-inside"
+                (cover)
+                (label :text "${title}")
+            )
+            (box        :orientation "h"
+                        :space-evenly false
+                        :class "cover-bg"
+                        :css ".cover-bg { background-image: url('${cover}'); }"
+            )
+        )
+    )
+)
+(defpoll title :interval "0.1s" "scripts/music --title")
+(defwidget cover []
+    (box        :class "cover"
+                :css ".cover { background-image: url('${cover}'); }"
+    )
+)
+(defpoll cover :interval "0.1s" "scripts/music --art")
 
 (defwidget middle-part []
     (box        :orientation "h"
@@ -130,10 +163,10 @@
 (defwindow bar
     :monitor 0
     :windowtype "dock"
-    :geometry (geometry :x "0%"
-                        :y "20px"
-                        :width "97.7%"
-                        :height "40px"
+    :geometry (geometry :x "10px"
+                        :y "10px"
+                        :width "100%"
+                        :height "50px"
                         :anchor "top center")
     :exclusive true
     (bar))
