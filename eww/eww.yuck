@@ -2,4 +2,6 @@
 (include "eww_variables.yuck")
 (include "eww_windows.yuck")
 (include "eww_widgets.yuck")
-(include "eww_popup.yuck")
+(include "eww_music_popup.yuck")
+(include "eww_light_popup.yuck")
+(include "eww_sound_popup.yuck")

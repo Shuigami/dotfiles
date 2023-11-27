@@ -87,7 +87,7 @@
                 :halign "end"
                 :space-evenly false
       (eventbox :space-evenly false
-                :onclick "eww open music-popup-closer && eww open music-popup-window"
+                :onclick "eww open music-popup-closer && eww open music-popup-window && eww update music-popup=true"
         (overlay
             (box        :orientation "h"
                         :space-evenly false
@@ -131,7 +131,7 @@
     )
 )
 (defwidget sound []
-    (eventbox :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+  (eventbox     :onclick "eww open sound-popup-closer && eww open sound-popup-window && eww update sound-popup=true"
         (box        :orientation "h"
                     :class "sound ${sound-icon == "󰝟" ? "disable" : "enable" }"
                     :space-evenly false
@@ -143,18 +143,24 @@
     )
 )
 (defwidget light []
+  (eventbox     :onclick "eww open light-popup-closer && eww open light-popup-window && eww update light-popup=true"
     (box        :orientation "h"
                 :class "light"
                 :space-evenly false
         (label :text "${light-icon}")
         (label :class "light-num" :text "${light-num}%")
     )
+  )
 )
 (defwidget wifi []
-    (box        :orientation "v"  
+    (box        :orientation "v"
                 :tooltip wifi-name
                 :class "wifi-icon"
                 :tooltip "${wifi-name}"
         (label :text "${wifi-icon}")
     )
 )
+
+
+(defwidget closer [window]
+  (eventbox :onclick "eww update ${window}=false && eww close ${window}-closer && eww close ${window}-window"))

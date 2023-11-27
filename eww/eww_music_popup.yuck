@@ -1,4 +1,4 @@
-(defwidget music-popup [] 
+(defwidget music-popup []
   (box :class "music-popup"
     (box :class "container border"
       (overlay
@@ -55,25 +55,3 @@
     )
   )
 )
-
-(defwindow music-popup-window
-  :monitor 0
-  :windowtype "dock"
-  :geometry (geometry :x "395px"
-                      :y "5px"
-                      :width "19.2%"
-                      :height "480px"
-                      :anchor "top right")
-  :stacking "fg"
-  (music-popup)
-)
-
-(defwidget closer [window]
-  (eventbox :onclick "eww close ${window}-window && eww close ${window}-closer"))
- 
-(defwindow music-popup-closer
-  :monitor 0
-  :geometry (geometry :width "100%" :height "100%")
-  :stacking "fg"
-  :focusable false
-  (closer :window "music-popup"))

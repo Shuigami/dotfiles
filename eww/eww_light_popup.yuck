@@ -1,0 +1,13 @@
+(defwidget light-popup [] 
+  (box :class "light-popup border" :space-evenly "false" :orientation "v"
+    (label :text "${light-icon}")
+    (scale :min 0
+           :max 101
+           :active true
+           :value "${light-num}"
+           :flipped "true"
+           :orientation "v"
+           :onchange "light -S {}"
+    )
+  )
+)

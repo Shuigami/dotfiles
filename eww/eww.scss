@@ -121,6 +121,14 @@ label {
 }
 
 // ----------------================ POPUP ================---------------- //
+.button-desactive {
+    color: #433d7b;
+}
+.hover {
+    color: #918bc6;
+}
+
+// ----------------================ MUSIC-POPUP ================---------------- //
 .music-popup {
     border-radius: 20px;
     background: rgb(43, 34, 98, 1);
@@ -173,9 +181,53 @@ label {
         padding: 0 20px;
     }
 }
-.button-desactive {
-    color: #433d7b;
+
+// ----------------================ LIGHT-POPUP ================---------------- //
+.light-popup {
+    scale {
+        margin-top: 10px;
+        min-height: 300px;
+    }
+    scale trough highlight {
+        background: #7169b5;
+        border: 2px solid #7169b5;
+        border-radius: 10px;
+        min-width: 10px;
+    }
+    scale trough {
+        border: 2px solid #7169b5;
+        border-radius: 10px;
+        min-width: 10px;
+        min-height: 50px;
+    }
+    label {
+        margin-top: 10px;
+        margin-right: 8px;
+        font-size: 2em;
+    }
 }
-.hover {
-    color: #918bc6;
+
+// ----------------================ SOUND-POPUP ================---------------- //
+.sound-popup {
+    scale {
+        margin-top: 10px;
+        min-height: 300px;
+    }
+    scale trough highlight {
+        background: #7169b5;
+        border: 2px solid #7169b5;
+        border-radius: 10px;
+        min-width: 10px;
+    }
+    scale trough {
+        border: 2px solid #7169b5;
+        border-radius: 10px;
+        min-width: 10px;
+        min-height: 50px;
+    }
+    label {
+        margin-top: 10px;
+        margin-right: 8px;
+        font-size: 2em;
+    }
 }
