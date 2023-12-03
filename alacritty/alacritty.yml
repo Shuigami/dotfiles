@@ -8,7 +8,6 @@ window:
   opacity: 0.8
 
 font:
-  #size: 8
   size: 14
   normal:
     family: FiraCode Nerd Font
