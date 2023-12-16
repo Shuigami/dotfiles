@@ -83,6 +83,11 @@ run_cmd() {
 }
 
 run_logout() {
+    hyprctl dispatch exit
+    i3-msg exit	
+    bspc quit
+}
+run_logout_true() {
     if [[ "$DESKTOP_SESSION" == 'openbox' ]]; then
         openbox --exit
     elif [[ "$DESKTOP_SESSION" == 'bspwm' ]]; then
