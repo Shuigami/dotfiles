@@ -25,6 +25,9 @@ export XMODIFIERS='@im=fcitx'
 alias ls='ls --color=auto'
 alias v='nvim'
 
+# Config
+alias hcf='nvim ~/.config/hypr/hyprland.conf'
+
 # Connect to vm
 alias vm='ssh ubuntu@141.145.204.217'
 

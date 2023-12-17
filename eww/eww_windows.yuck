@@ -4,7 +4,6 @@
     :geometry (geometry :x "10px"
                         :y "10px"
                         :width "100%"
-                        :height "50px"
                         :anchor "top center")
     :exclusive true
     (bar)

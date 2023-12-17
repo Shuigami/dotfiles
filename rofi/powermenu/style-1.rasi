@@ -5,12 +5,12 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    font:                        "FiraCode Nerd Font 10";
+    font:                        "FiraCode Nerd Font 12";
     background-transparent:      #1e1e1e7f;
     background:                  #1e1e1e;
     background-alt:              #2e2e2e;
     foreground:                  #FFFFFF;
-    selected:                    #82b3ab;
+    selected:                    #7169b5;
     active:                      #5e5e5e;
     urgent:                      #5e5e5e;
 }

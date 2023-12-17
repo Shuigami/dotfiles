@@ -1,19 +1,34 @@
 // ----------------================ BAR ================---------------- //
 * { all: unset; }
 
+$border: #7169b5;
+$background: #2a2262;
+$red: #ff5e5e;
+$green: #4bcc7c;
+$hover: #918bc6;
+$desactive: #433d7b;
+
+$opacity-bg: 0.9;
+
 .bar {
-    background: rgba(255, 255, 255, 0);
     margin: 0 0.5rem;
 }
 label {
-    font-size: 18px;
-    color: #7169b5;
+    font-size: 16px;
+    color: $border;
     transition: color 0.2s ease-in-out;
 }
 .border {
-    border: 2px solid #7169b5;
+    border: 2px solid $border;
     border-radius: 10px;
-    background: rgb(43, 34, 98, 0.8);
+    background: $background;
+    opacity: $opacity-bg;
+}
+tooltip {
+    border: 2px solid $border;
+    border-radius: 10px;
+    background: $background;
+    opacity: $opacity-bg;
 }
 
 // ----------------================ LEFT-PART ================---------------- //
@@ -34,24 +49,21 @@ label {
 }
 .low-battery {
     label {
-        color: #ff5e5e;
+        color: $red;
         margin: 0px 20px 0px 20px;
     }
-    border: 2px solid #ff5e5e;
+    border: 2px solid $red;
     border-radius: 10px;
-    background: rgba(128, 47, 47, 0.8)
+    background: $red;
+    opacity: $opacity-bg;
 }
-
 
 // ----------------================ RIGHT-PART ================---------------- //
 
 // Music
 .music {
     margin-right: 20px;
-    background: rgb(43, 34, 98, 1);
-    label {
-        color: #918bc6;
-    }
+    background: $background;
 }
 .music-inside {
     margin: 0px 20px;
@@ -81,12 +93,12 @@ label {
 }
 .battery-low {
     label {
-        color: #ff5e5e;
+        color: $red;
     }
 }
 .battery-charging {
     label {
-        color: #4bcc7c;
+        color: $green;
     }
 }
 
@@ -100,7 +112,7 @@ label {
 }
 .disable {
     label {
-        color: #453795;
+        color: $desactive;
     }
     > label {
         margin-right: 11px;
@@ -122,16 +134,16 @@ label {
 
 // ----------------================ POPUP ================---------------- //
 .button-desactive {
-    color: #433d7b;
+    color: $desactive;
 }
 .hover {
-    color: #918bc6;
+    color: $hover;
 }
 
 // ----------------================ MUSIC-POPUP ================---------------- //
 .music-popup {
     border-radius: 20px;
-    background: rgb(43, 34, 98, 1);
+    background: $background;
     .cover {
         margin: 30px 50px 0px 50px;
         min-height: 200px;
@@ -147,12 +159,12 @@ label {
     scale {
     }
     scale trough highlight {
-        border: 2px solid #7169b5;
+        border: 2px solid $border;
         border-radius: 10px;
     }
     scale trough {
-        background: rgb(43, 34, 98, 1);
-        border: 2px solid #7169b5;
+        background: $background;
+        border: 2px solid $border;
         border-radius: 10px;
         min-height: 3px;
         min-width: 50px;
@@ -189,13 +201,13 @@ label {
         min-height: 300px;
     }
     scale trough highlight {
-        background: #7169b5;
-        border: 2px solid #7169b5;
+        background: $border;
+        border: 2px solid $border;
         border-radius: 10px;
         min-width: 10px;
     }
     scale trough {
-        border: 2px solid #7169b5;
+        border: 2px solid $border;
         border-radius: 10px;
         min-width: 10px;
         min-height: 50px;
@@ -214,13 +226,13 @@ label {
         min-height: 300px;
     }
     scale trough highlight {
-        background: #7169b5;
-        border: 2px solid #7169b5;
+        background: $border;
+        border: 2px solid $border;
         border-radius: 10px;
         min-width: 10px;
     }
     scale trough {
-        border: 2px solid #7169b5;
+        border: 2px solid $border;
         border-radius: 10px;
         min-width: 10px;
         min-height: 50px;
