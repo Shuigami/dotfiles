@@ -38,6 +38,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 Plug 'elkowar/yuck.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 -- Telescope
 Plug 'nvim-lua/plenary.nvim'
@@ -126,6 +127,7 @@ require('nvim-web-devicons').setup({
   }
  };
 })
+require('gitsigns').setup()
 
 ------------------------------- Default -------------------------------
 vim.wo.colorcolumn = '80'
