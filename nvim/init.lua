@@ -39,10 +39,7 @@ Plug 'romgrk/barbar.nvim'
 Plug 'elkowar/yuck.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter'
-<<<<<<< HEAD
-=======
 Plug('nvimdev/dashboard-nvim', { event = 'VimEnter' })
->>>>>>> arch
 
 -- Telescope
 Plug 'nvim-lua/plenary.nvim'
@@ -174,13 +171,8 @@ map('n', '<C-n>', '<Cmd>enew<CR>')
 map('n', '<A-Tab>', '<Cmd>NERDTreeToggle<CR>')
 
 -- Telescope
-<<<<<<< HEAD
-map('n', "ff", ":Telescope file_browser<CR>", { noremap = true })
-map('n', "fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { noremap = true })
-=======
 map('n', "fb", ":Telescope file_browser<CR>", { noremap = true })
 map('n', "ff", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { noremap = true })
->>>>>>> arch
 
 -- CoC
 keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
