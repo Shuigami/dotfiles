@@ -31,6 +31,20 @@ alias hcf='nvim ~/.config/hypr/hyprland.conf'
 # Connect to vm
 alias vm='ssh ubuntu@141.145.204.217'
 
+# Afs alias
+cafs()
+{
+    kinit -f ewan.schwaller@CRI.EPITA.FR
+    mkdir -p ~/afs
+    sshfs -o reconnect ewan.schwaller@ssh.cri.epita.fr:/afs/cri.epita.fr/user/e/ew/ewan.schwaller/u/ ~/afs
+    cd ~/afs
+}
+dafs()
+{
+    umount ~/afs
+    rmdir ~/afs
+}
+
 # Remouse function
 re()
 {
@@ -59,4 +73,31 @@ red()
     echo $ip
     source ~/.env_remouse/bin/activate
     remouse --key .ssh/remarkable --password aodLKYhCyz --address $ip
+}
+
+kr()
+{
+    nohup obsidian &
+    nohup firefox ~/Documents/Talk_To_Me_In_Korean_Levels_1_9_pdf.pdf &
+    exit
+}
+export PGDATA="$HOME/postgres_data"
+export PGHOST="/tmp"
+
+# Add JBang to environment
+alias j!=jbang
+export PATH="$HOME/.jbang/bin:$PATH"
+
+gp() {
+    if [ $# -ne 3 ]; then
+        return;
+    fi
+    clang-format-epita
+    git add $1
+    str=$1
+    str=${str::-1}
+    git commit -m "$str: $2"
+    git push
+    git tag $3
+    git push --tags
 }

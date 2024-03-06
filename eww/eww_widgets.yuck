@@ -87,7 +87,7 @@
                 :halign "end"
                 :space-evenly false
       (eventbox :space-evenly false
-                :onhover "eww open music-popup-closer && eww open music-popup-window && eww update music-popup=true"
+                :onclick "eww open music-popup-closer && eww open music-popup-window && eww update music-popup=true"
         (overlay
             (box        :orientation "h"
                         :space-evenly false
@@ -131,7 +131,7 @@
     )
 )
 (defwidget sound []
-  (eventbox     :onhover "eww open sound-popup-closer && eww open sound-popup-window && eww update sound-popup=true"
+  (eventbox     :onclick "eww open sound-popup-closer && eww open sound-popup-window && eww update sound-popup=true"
         (box        :orientation "h"
                     :class "sound ${sound-icon == "󰝟" ? "disable" : "enable" }"
                     :space-evenly false
@@ -143,7 +143,7 @@
     )
 )
 (defwidget light []
-  (eventbox     :onhover "eww open light-popup-closer && eww open light-popup-window && eww update light-popup=true"
+  (eventbox     :onclick "eww open light-popup-closer && eww open light-popup-window && eww update light-popup=true"
     (box        :orientation "h"
                 :class "light"
                 :space-evenly false

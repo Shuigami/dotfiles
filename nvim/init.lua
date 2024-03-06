@@ -5,7 +5,7 @@ local keyset = vim.keymap.set
 local map = vim.keymap.set
 
 ------------------------------- Plug -------------------------------
-vim.call('plug#begin', '/home/ewan.schwaller/.config/nvim/plugged')
+vim.call('plug#begin', '/home/shui/.config/nvim/plugged')
 
 -- Colorscheme
 Plug 'navarasu/onedark.nvim'
@@ -39,6 +39,10 @@ Plug 'romgrk/barbar.nvim'
 Plug 'elkowar/yuck.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter'
+<<<<<<< HEAD
+=======
+Plug('nvimdev/dashboard-nvim', { event = 'VimEnter' })
+>>>>>>> arch
 
 -- Telescope
 Plug 'nvim-lua/plenary.nvim'
@@ -170,8 +174,13 @@ map('n', '<C-n>', '<Cmd>enew<CR>')
 map('n', '<A-Tab>', '<Cmd>NERDTreeToggle<CR>')
 
 -- Telescope
+<<<<<<< HEAD
 map('n', "ff", ":Telescope file_browser<CR>", { noremap = true })
 map('n', "fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { noremap = true })
+=======
+map('n', "fb", ":Telescope file_browser<CR>", { noremap = true })
+map('n', "ff", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { noremap = true })
+>>>>>>> arch
 
 -- CoC
 keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
@@ -184,6 +193,24 @@ map('n', '<C-f><Space>', '<Cmd>noh<CR>')
 ----------------------------------- Other -----------------------------------
 function Sad(line_nr, from, to, fname)
   vim.cmd(string.format("silent !sed -i '%ss/%s/%s/' %s", line_nr, from, to, fname))
+end
+
+-- Some servers have issues with backup files, see #649
+vim.opt.backup = false
+vim.opt.writebackup = false
+
+-- Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+-- delays and poor user experience
+vim.opt.updatetime = 300
+
+-- Always show the signcolumn, otherwise it would shift the text each time
+-- diagnostics appeared/became resolved
+vim.opt.signcolumn = "yes"
+
+-- Autocomplete
+function _G.check_back_space()
+    local col = vim.fn.col('.') - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
 end
 
 -- Some servers have issues with backup files, see #649
