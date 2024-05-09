@@ -101,3 +101,6 @@ gp() {
     git tag $3
     git push --tags
 }
+
+alias dodo="docker run --rm -it -v $PWD:/tc --workdir /tc registry.lrde.epita.fr/tc-sid"
+. "$HOME/.cargo/env"

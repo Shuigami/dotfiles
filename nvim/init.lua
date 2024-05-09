@@ -40,6 +40,7 @@ Plug 'elkowar/yuck.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug('nvimdev/dashboard-nvim', { event = 'VimEnter' })
+Plug('iamcco/markdown-preview.nvim', { ['do'] = 'cd app && npx --yes yarn install' })
 
 -- Telescope
 Plug 'nvim-lua/plenary.nvim'
@@ -136,9 +137,9 @@ vim.wo.colorcolumn = '80'
 vim.opt.expandtab = true
 vim.opt.smarttab = true
 vim.opt.shiftround = true
-vim.opt.shiftwidth=4
-vim.opt.softtabstop=4
-vim.opt.tabstop=4
+vim.opt.shiftwidth=2
+vim.opt.softtabstop=2
+vim.opt.tabstop=2
 
 vim.opt.smartindent = true
 vim.opt.autoindent = true
@@ -170,8 +171,11 @@ map('n', '<C-n>', '<Cmd>enew<CR>')
 -- NerdTree
 map('n', '<A-Tab>', '<Cmd>NERDTreeToggle<CR>')
 
+map('n', '<C-c>e', ":Copilot enable<CR>")
+map('n', '<C-c>d', ":Copilot disable<CR>")
+
 -- Telescope
-map('n', "fb", ":Telescope file_browser<CR>", { noremap = true })
+map('n', "fb", ":Telescope find_files<CR>", { noremap = true })
 map('n', "ff", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { noremap = true })
 
 -- CoC

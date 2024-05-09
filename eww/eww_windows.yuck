@@ -6,6 +6,9 @@
                         :width "100%"
                         :anchor "top center")
     :exclusive true
+    :stacking "bg"
+    :windowtype "dock"
+    :wm-ignore false
     (bar)
 )
 

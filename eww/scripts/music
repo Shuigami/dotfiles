@@ -7,7 +7,7 @@ get_music_title() {
         fi
         echo "$title"
     else
-        echo "offline"
+        echo "no media"
     fi
 }
 

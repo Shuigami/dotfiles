@@ -1,20 +1,28 @@
 // ----------------================ BAR ================---------------- //
 * { all: unset; }
 
+/*
 $border: #5a60c0;
 $background: #191f50;
+$desactive: #1f377d;
+*/
+$border: #7169b5;
+$background: #191f50;
+$desactive: #1f377d;
+$red-bg: #662525;
 $red: #ff5e5e;
 $green: #4bcc7c;
 $hover: #918bc6;
-$desactive: #1f377d;
 
-$opacity-bg: 0.9;
+$opacity: 0.9;
 
 .bar {
     margin: 0 0.5rem;
 }
 label {
     font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
     color: $border;
     transition: color 0.2s ease-in-out;
 }
@@ -22,13 +30,13 @@ label {
     border: 2px solid $border;
     border-radius: 10px;
     background: $background;
-    opacity: $opacity-bg;
+    opacity: $opacity;
 }
 tooltip {
     border: 2px solid $border;
     border-radius: 10px;
     background: $background;
-    opacity: $opacity-bg;
+    opacity: $opacity;
 }
 
 // ----------------================ LEFT-PART ================---------------- //
@@ -54,8 +62,8 @@ tooltip {
     }
     border: 2px solid $red;
     border-radius: 10px;
-    background: $red;
-    opacity: $opacity-bg;
+    background: $red-bg;
+    opacity: $opacity;
 }
 
 // ----------------================ RIGHT-PART ================---------------- //
