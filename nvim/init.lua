@@ -47,6 +47,17 @@ Plug 'nvim-lua/plenary.nvim'
 Plug('nvim-telescope/telescope.nvim', { branch = '0.1.5' })
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 
+-- Clojure
+Plug 'tpope/vim-fireplace'
+Plug 'guns/vim-slamhound'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf'
+Plug 'liuchengxu/vim-clap'
+Plug 'Olical/conjure'
+
+Plug('guns/vim-sexp', { ft = 'clojure'})
+Plug('liquidz/vim-iced', { ft = 'clojure'})
+
 vim.call('plug#end')
 
 ------------------------------- Setup -------------------------------

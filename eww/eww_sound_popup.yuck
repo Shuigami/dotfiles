@@ -1,5 +1,5 @@
 (defwidget sound-popup [] 
-  (box :class "sound-popup border" :space-evenly "false" :orientation "v"
+  (box :class "sound-popup border popup-element ${sound-icon == "󰝟" ? "disable" : "enable"}" :space-evenly "false" :orientation "h"
     (eventbox :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
       (label :text "${sound-icon}")
     )
@@ -7,8 +7,7 @@
            :max 101
            :active true
            :value "${sound-value}"
-           :flipped "true"
-           :orientation "v"
+           :orientation "h"
            :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"
     )
   )

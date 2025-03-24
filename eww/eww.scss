@@ -1,34 +1,31 @@
 // ----------------================ BAR ================---------------- //
 * { all: unset; }
 
-/*
-$border: #5a60c0;
-$background: #191f50;
-$desactive: #1f377d;
-*/
-$border: #7169b5;
-$background: #191f50;
-$desactive: #1f377d;
+$border: #e1a059;
+$background: #291611;
+$desactive: #562f1e;
+$hover: #688790;
 $red-bg: #662525;
 $red: #ff5e5e;
 $green: #4bcc7c;
-$hover: #918bc6;
 
 $opacity: 0.9;
 
 .bar {
-    margin: 0 0.5rem;
+    margin: 0 2rem;
+    padding-bottom: 0.5rem;
 }
 label {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     font-style: italic;
     color: $border;
     transition: color 0.2s ease-in-out;
+    padding-top: 2px;
 }
 .border {
     border: 2px solid $border;
-    border-radius: 10px;
+    border-radius: 15px;
     background: $background;
     opacity: $opacity;
 }
@@ -61,7 +58,7 @@ tooltip {
         margin: 0px 20px 0px 20px;
     }
     border: 2px solid $red;
-    border-radius: 10px;
+    border-radius: 20px;
     background: $red-bg;
     opacity: $opacity;
 }
@@ -75,6 +72,7 @@ tooltip {
 }
 .music-inside {
     margin: 0px 20px;
+    padding-bottom: 2px;
 }
 .cover-bg {
     background-repeat: no-repeat;
@@ -86,7 +84,6 @@ tooltip {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    min-height: 40px;
     min-width: 40px;
     margin: 5px 20px 5px 0px;
 }
@@ -147,9 +144,24 @@ tooltip {
 .hover {
     color: $hover;
 }
+.popup-element {
+  margin-bottom: 20px;
+}
+.button-popup {
+  margin: 0 120px;
+  margin-bottom: 20px;
+  min-height: 50px;
+  label {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: bolder;
+  }
+
+}
 
 // ----------------================ MUSIC-POPUP ================---------------- //
 .music-popup {
+    min-height: 480px;
     border-radius: 20px;
     background: $background;
     .cover {
@@ -205,8 +217,8 @@ tooltip {
 // ----------------================ LIGHT-POPUP ================---------------- //
 .light-popup {
     scale {
-        margin-top: 10px;
-        min-height: 300px;
+        margin-left: 10px;
+        min-width: 300px;
     }
     scale trough highlight {
         background: $border;
@@ -217,37 +229,61 @@ tooltip {
     scale trough {
         border: 2px solid $border;
         border-radius: 10px;
-        min-width: 10px;
-        min-height: 50px;
+        min-width: 50px;
+        min-height: 10px;
     }
     label {
-        margin-top: 10px;
-        margin-right: 8px;
+        margin: 0 15px 0 15px;
         font-size: 2em;
     }
 }
 
 // ----------------================ SOUND-POPUP ================---------------- //
 .sound-popup {
-    scale {
-        margin-top: 10px;
-        min-height: 300px;
-    }
-    scale trough highlight {
-        background: $border;
-        border: 2px solid $border;
-        border-radius: 10px;
-        min-width: 10px;
-    }
-    scale trough {
-        border: 2px solid $border;
-        border-radius: 10px;
-        min-width: 10px;
-        min-height: 50px;
-    }
-    label {
-        margin-top: 10px;
-        margin-right: 8px;
-        font-size: 2em;
-    }
+  scale {
+    margin-left: 10px;
+    min-width: 300px;
+  }
+  scale trough highlight {
+    background: $border;
+    border: 2px solid $border;
+    border-radius: 10px;
+    min-width: 10px;
+  }
+  scale trough {
+    border: 2px solid $border;
+    border-radius: 10px;
+    min-width: 50px;
+    min-height: 10px;
+  }
+  label {
+    margin: 0 15px 0 15px;
+    font-size: 2em;
+  }
+}
+
+// ----------------================ UPGRADE-POPUP ================---------------- //
+
+.upgrade-popup {
+    min-width: 380px;
+    min-height: 160px;
+}
+
+.upgrade-popup-title {
+    margin-top: 1em;
+    font-size: 2em;
+}
+
+.upgrade-popup-input {
+  margin: 0px 40px 25px 40px;
+    border: 2px solid $border;
+    border-radius: 10px;
+    background: $background;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.upgrade-popup-close {
+  margin: 0px 40px 25px 40px;
+  font-size: 20px;
 }

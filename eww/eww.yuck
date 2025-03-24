@@ -5,3 +5,5 @@
 (include "eww_music_popup.yuck")
 (include "eww_light_popup.yuck")
 (include "eww_sound_popup.yuck")
+(include "eww_button_popup.yuck")
+(include "eww_upgrade_popup.yuck")

@@ -22,18 +22,14 @@ get_music_artist() {
 get_music_cover() {
     playerStatus=$(playerctl -l --no-messages)
 
-    # Firefox founded
     if [ "${playerStatus:0:7}" == "firefox" ]; then
         path="$HOME/.mozilla/firefox/firefox-mpris/"
         image="$(ls $path)"
-    
         echo "$path$image"
-        return 
-    
-    # Spotify founded
-    elif [ "$playerStatus" == "spotify" ]; then
+    elif [ "$playerStatus" == "spotify" ] || [ "${playerStatus:0:8}" == "chromium" ] || [ "${playerStatus:0:5}" == "brave" ]; then
         echo $(playerctl metadata | grep artUrl | awk '{print $3}')
-        return
+    else
+        echo "https://cdn-icons-png.flaticon.com/512/13434/13434972.png"
     fi
 }
 

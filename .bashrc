@@ -1,4 +1,12 @@
 # ============================== PS1 ============================== #
+virtualenv_info(){
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        venv="${VIRTUAL_ENV##*/}"
+    else
+        venv=''
+    fi
+    [[ -n "$venv" ]] && echo "(venv:$venv) "
+}
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
 }
@@ -10,7 +18,11 @@ parse_git_status() {
     fi
     echo "$status"
 }
-export PS1="\n\[$(tput setaf 111)\]\w\[$(tput setaf 146)\]\$(parse_git_branch)\$(parse_git_status)\n\[$(tput setaf 141)\]> \[$(tput sgr0)\]"
+
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+VENV="\$(virtualenv_info)";
+
+export PS1="\n\[$(tput setaf 103)\]\w\[$(tput setaf 146)\]\$(parse_git_branch)\$(parse_git_status) \[$(tput setaf 1)\]$VENV\n\[$(tput setaf 210)\]> \[$(tput sgr0)\]"
 
 # ============================== Export ============================== #
 export NVIM_LOG_FILE=~/.local/share/nvim/log
@@ -20,6 +32,8 @@ export GTK_IM_MODULE='fcitx'
 export QT_IM_MODULE='fcitx'
 export SDL_IM_MODULE='fcitx'
 export XMODIFIERS='@im=fcitx'
+
+export LS_COLORS=$LS_COLORS:'di=1;31:'
 
 # ============================== Alias ============================== #
 alias ls='ls --color=auto'
@@ -83,6 +97,7 @@ kr()
 }
 export PGDATA="$HOME/postgres_data"
 export PGHOST="/tmp"
+export PGPORT="5432"
 
 # Add JBang to environment
 alias j!=jbang
@@ -102,5 +117,41 @@ gp() {
     git push --tags
 }
 
-alias dodo="docker run --rm -it -v $PWD:/tc --workdir /tc registry.lrde.epita.fr/tc-sid"
-. "$HOME/.cargo/env"
+shuigit() {
+    echo "Files/folder to add?"
+    read files
+
+    echo "Commit message?"
+    read msg
+
+    echo "Tag?"
+    read tag
+
+    echo "You sure? (y/n)"
+    printf "Files/folder: $files\t\tCommit message: $msg\t\tTag: $tag\n"
+
+    read ans
+    if [[ "$ans" != "y" && "$ans" != "Y" ]]; then
+        return;
+    fi
+
+    git add "$files"
+    git commit -m "$msg"
+    git push
+
+    if [ -n "$tag" ]; then
+        git tag "$tag"
+        git push --tags
+    fi
+}
+
+shuicmake() {
+  cmake -B build/
+  cmake --build build/
+}
+
+export PATH=$HOME/.local/bin:$PATH
+alias zed="WAYLAND_DISPLAY='' zed"
+
+eval "$(thefuck --alias)"
+

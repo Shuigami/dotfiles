@@ -4,6 +4,7 @@
     :geometry (geometry :x "10px"
                         :y "10px"
                         :width "100%"
+                        :height "5%"
                         :anchor "top center")
     :exclusive true
     :stacking "bg"
@@ -12,65 +13,39 @@
     (bar)
 )
 
-(defwindow music-popup-window
-  :monitor 0
-  :windowtype "dock"
-  :geometry (geometry :x "395px"
-                      :y "5px"
-                      :width "19.2%"
-                      :height "480px"
-                      :anchor "top right")
-  :stacking "fg"
-  (revealer :reveal "${music-popup}" :transition "crossfade"
-    (music-popup)
-  )
+(defwindow popup-window
+    :monitor 0
+    :geometry (geometry :x "0px"
+                        :y "0px"
+                        :width "380px"
+                        :anchor "center right")
+    :windowtype "desktop"
+    :exclusive true
+  (revealer :reveal "${popup}" :transition "crossfade" :duration 200
+    (box        :orientation "v"
+                :space-evenly false
+                :class "popup"
+      (button-popup)
+      (light-popup)
+      (sound-popup)
+      (music-popup)
+    )
+    )
 )
 
-(defwindow music-popup-closer
-  :monitor 0
-  :geometry (geometry :width "100%" :height "100%")
-  :stacking "fg"
-  :focusable false
-  (closer :window "music-popup"))
-
-(defwindow light-popup-window
-  :monitor 0
-  :windowtype "dock"
-  :geometry (geometry :x "90px"
-                      :y "5px"
-                      :width "3%"
-                      :height "380px"
-                      :anchor "top right")
-  :stacking "fg"
-  (revealer :reveal "${light-popup}" :transition "crossfade"
-    (light-popup)
+(defwindow popup-upgrade
+    :monitor 0
+    :geometry (geometry :x "0px"
+                        :y "0px"
+                        :width "380px"
+                        :height "160px"
+                        :anchor "center")
+    :windowtype "desktop"
+    :exclusive false
+    :focusable true
+  (box        :orientation "v"
+              :space-evenly false
+              :class "popup-upgrade"
+    (upgrade-popup)
   )
 )
-
-(defwindow light-popup-closer
-  :monitor 0
-  :geometry (geometry :width "100%" :height "100%")
-  :stacking "fg"
-  :focusable false
-  (closer :window "light-popup"))
-
-(defwindow sound-popup-window
-  :monitor 0
-  :windowtype "dock"
-  :geometry (geometry :x "190px"
-                      :y "5px"
-                      :width "3%"
-                      :height "380px"
-                      :anchor "top right")
-  :stacking "fg"
-  (revealer :reveal "${sound-popup}" :transition "crossfade"
-    (sound-popup)
-  )
-)
-
-(defwindow sound-popup-closer
-  :monitor 0
-  :geometry (geometry :width "100%" :height "100%")
-  :stacking "fg"
-  :focusable false
-  (closer :window "sound-popup"))

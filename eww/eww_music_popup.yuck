@@ -1,5 +1,5 @@
 (defwidget music-popup []
-  (box :class "music-popup"
+  (box :class "music-popup popup-element"
     (box :class "container border"
       (overlay
         (box :class "music-popup-bg"

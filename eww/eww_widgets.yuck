@@ -87,7 +87,7 @@
                 :halign "end"
                 :space-evenly false
       (eventbox :space-evenly false
-                :onclick "eww open music-popup-closer && eww open music-popup-window && eww update music-popup=true"
+                :onclick "eww open popup-window && eww update popup=true"
         (overlay
             (box        :orientation "h"
                         :space-evenly false
@@ -98,7 +98,6 @@
             (box        :orientation "h"
                         :space-evenly false
                         :class "cover-bg"
-                        :css ".cover-bg { background-image: url('${cover}'); }"
             )
         )
       )
@@ -131,7 +130,7 @@
     )
 )
 (defwidget sound []
-  (eventbox     :onclick "eww open sound-popup-closer && eww open sound-popup-window && eww update sound-popup=true"
+  (eventbox     :onclick "eww open popup-window && eww update popup=true" :timeout 2000
         (box        :orientation "h"
                     :class "sound ${sound-icon == "󰝟" ? "disable" : "enable" }"
                     :space-evenly false
@@ -143,7 +142,7 @@
     )
 )
 (defwidget light []
-  (eventbox     :onclick "eww open light-popup-closer && eww open light-popup-window && eww update light-popup=true"
+  (eventbox     :onclick "eww open popup-window && eww update popup=true"
     (box        :orientation "h"
                 :class "light"
                 :space-evenly false
@@ -154,13 +153,8 @@
 )
 (defwidget wifi []
     (box        :orientation "v"
-                :tooltip wifi-name
                 :class "wifi-icon"
                 :tooltip "${wifi-name}"
         (label :text "${wifi-icon}")
     )
 )
-
-
-(defwidget closer [window]
-  (eventbox :onclick "eww update ${window}=false && eww close ${window}-closer && eww close ${window}-window"))

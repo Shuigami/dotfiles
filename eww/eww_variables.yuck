@@ -19,7 +19,6 @@
 (defpoll sound-icon :interval "100ms" "scripts/sound icon")
 
 ;; ----------------================ POPUP ================---------------- ;;
-(defvar music-popup "false")
 (defpoll artist :interval "1s" "scripts/music --artist")
 (defpoll position :interval "1s" "scripts/music --position")
 (defpoll music-status :interval "1s" "scripts/music --status")
@@ -31,6 +30,6 @@
 (defvar next-hover "false")
 (defvar shuffle-hover "false")
 
-(defvar light-popup "true")
-(defvar sound-popup "true")
+(defvar popup "false")
+(defvar my_widget_text "")
 (defpoll sound-value :interval "1s" "scripts/sound num | sed 's/.$//'")
