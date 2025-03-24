@@ -4,7 +4,7 @@ clock
 timestr=%R
 datestr=%a,%e of %B
 
-image=/home/shui/Pictures/Wallpaper/wp7.png
+image=/home/shui/Pictures/Wallpaper/wp8.jpg
 
 fade-in=0.2
 
@@ -47,7 +47,7 @@ inside-wrong-color=bf616a00
 line-uses-inside
 
 # Sets the color of the ring of the indicator when typing or idle.
-ring-color=562f1e
+ring-color=263b37
 ring-clear-color=ebcb8b
 ring-caps-lock-color=d08770
 ring-ver-color=a3be8c

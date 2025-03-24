@@ -1,15 +1,15 @@
 // ----------------================ BAR ================---------------- //
 * { all: unset; }
 
-$border: #e1a059;
-$background: #291611;
-$desactive: #562f1e;
+$border: #77997e;
+$background: #0b1123;
+$desactive: #263b37;
 $hover: #688790;
 $red-bg: #662525;
 $red: #ff5e5e;
 $green: #4bcc7c;
 
-$opacity: 0.9;
+$opacity: 0.8;
 
 .bar {
     margin: 0 2rem;
@@ -25,7 +25,7 @@ label {
 }
 .border {
     border: 2px solid $border;
-    border-radius: 15px;
+    border-radius: 10px;
     background: $background;
     opacity: $opacity;
 }
