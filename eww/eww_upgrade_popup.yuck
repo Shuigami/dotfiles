@@ -1,0 +1,15 @@
+(defwidget upgrade-popup []
+  (box :class "upgrade-popup border popup-element" :orientation "v"
+    (label :text "SHUIIII ?" :class "upgrade-popup-title")
+    (label :text "Continue (y/n)?" :class "upgrade-popup-text")
+    (input :class "upgrade-popup-input"
+           :onaccept "bash '/home/shui/.config/eww/scripts/sui.sh' {}"
+    )
+
+  (eventbox     :onclick "eww close popup-upgrade"
+    (box :class "button-popup border"
+      (label :text "CLOSE")
+    )
+  )
+  )
+)

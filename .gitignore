@@ -1,22 +1,46 @@
+# Ignore all files in the .config directory except for specific ones
 *
+
+# Files to keep in the .config directory
 !.gitignore
 !.gdbinit
 !README.md
-!alacritty/
-!betterlockscreen/
-!bspwm/
-!dunstrc
-!eww/
-!flameshot/
-!hypr/
-!i3/
-!neofetch/
-!nvim/
 !pavucontrol.ini
 !picom.conf
+!dunstrc
+
+# Directories to keep in the .config directory
+!alacritty/
+!alacritty/**
+!betterlockscreen/
+!betterlockscreen/**
+!bspwm/
+!bspwm/**
+!eww/
+!eww/**
+!flameshot/
+!flameshot/**
+!hypr/
+!hypr/**
+!i3/
+!i3/**
+!neofetch/
+!neofetch/**
+!nvim/
+!nvim/**
 !polybar/
+!polybar/**
 !rofi/
+!rofi/**
 !scripts/
+!scripts/**
 !swaylock/
+!swaylock/**
 !sxhkd/
+!sxhkd/**
 !zed/
+!zed/**
+
+# Exclude specific files and directories
+zed/.tmp*
+nvim/plugged

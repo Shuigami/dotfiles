@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+# Detect window manager
+detect_wm() {
+    if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
+        echo "hyprland"
+    elif pgrep -x bspwm > /dev/null; then
+        echo "bspwm"
+    else
+        echo "unknown"
+    fi
+}
+
+switch_workspace_hyprland() {
+    workspace_id=$1
+    hyprctl dispatch workspace $workspace_id
+}
+
+switch_workspace_bspwm() {
+    workspace_id=$1
+    # Get the desktop name by index (bspwm desktops are 1-indexed)
+    desktop_name=$(bspc query -D --names | sed -n "${workspace_id}p")
+    if [[ -n "$desktop_name" ]]; then
+        bspc desktop -f "$desktop_name"
+    fi
+}
+
+switch_workspace() {
+    workspace_id=$1
+    WM=$(detect_wm)
+    case "$WM" in
+        "hyprland")
+            switch_workspace_hyprland $workspace_id
+            ;;
+        "bspwm")
+            switch_workspace_bspwm $workspace_id
+            ;;
+        *)
+            echo "Unknown window manager"
+            ;;
+    esac
+}
+
+# Check if workspace ID is provided
+if [[ -z "$1" ]]; then
+    echo "Usage: $0 <workspace_id>"
+    exit 1
+fi
+
+switch_workspace $1

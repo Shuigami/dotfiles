@@ -1,0 +1,7 @@
+(defwidget button-popup []
+  (eventbox     :onclick "eww update popup=false && eww close popup-window"
+    (box :class "button-popup border"
+      (label :text "CLOSE")
+    )
+  )
+)
