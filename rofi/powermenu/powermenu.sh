@@ -74,6 +74,7 @@ run_cmd() {
             amixer set Master mute
             systemctl suspend
             swaylock
+            betterlockscreen -l
 		elif [[ $1 == '--logout' ]]; then
             run_logout
 		fi

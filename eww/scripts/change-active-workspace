@@ -1,4 +1,16 @@
 #! /bin/bash
+
+# Detect window manager
+detect_wm() {
+    if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
+        echo "hyprland"
+    elif pgrep -x bspwm > /dev/null; then
+        echo "bspwm"
+    else
+        echo "unknown"
+    fi
+}
+
 function clamp {
 	min=$1
 	max=$2
@@ -6,16 +18,46 @@ function clamp {
 	python -c "print(max($min, min($val, $max)))"
 }
 
+change_workspace_hyprland() {
+	target=$1
+	echo "jumping to $target"
+	hyprctl dispatch workspace $target
+}
+
+change_workspace_bspwm() {
+	target=$1
+	echo "jumping to $target"
+	# Get the desktop name by index (bspwm desktops are 1-indexed)
+	desktop_name=$(bspc query -D --names | sed -n "${target}p")
+	if [[ -n "$desktop_name" ]]; then
+		bspc desktop -f "$desktop_name"
+	fi
+}
+
+change_workspace() {
+	target=$1
+	WM=$(detect_wm)
+	case "$WM" in
+		"hyprland")
+			change_workspace_hyprland $target
+			;;
+		"bspwm")
+			change_workspace_bspwm $target
+			;;
+		*)
+			echo "Unknown window manager"
+			;;
+	esac
+}
+
 direction=$1
 current=$2
 if test "$direction" = "down"
 then
 	target=$(clamp 1 10 $(($current+1)))
-	echo "jumping to $target"
-	hyprctl dispatch workspace $target
+	change_workspace $target
 elif test "$direction" = "up"
 then
 	target=$(clamp 1 10 $(($current-1)))
-	echo "jumping to $target"
-	hyprctl dispatch workspace $target
+	change_workspace $target
 fi

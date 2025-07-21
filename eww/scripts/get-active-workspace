@@ -1,6 +1,61 @@
 #!/usr/bin/env bash
 
-hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id'
+detect_wm() {
+    if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
+        echo "hyprland"
+    elif pgrep -x bspwm > /dev/null; then
+        echo "bspwm"
+    else
+        echo "unknown"
+    fi
+}
 
-socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
-  stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}'
+WM=$(detect_wm)
+
+get_active_workspace_hyprland() {
+    hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id'
+}
+
+get_active_workspace_bspwm() {
+    CURRENT_DESKTOP=$(bspc query -D -d focused --names)
+    ALL_DESKTOPS=$(bspc query -D --names)
+    echo "$ALL_DESKTOPS" | head -10 | nl -v1 | awk -v target="$CURRENT_DESKTOP" '$2 == target {print $1}'
+}
+
+get_active_workspace() {
+    case "$WM" in
+        "hyprland")
+            get_active_workspace_hyprland
+            ;;
+        "bspwm")
+            get_active_workspace_bspwm
+            ;;
+        *)
+            echo "1"
+            ;;
+    esac
+}
+
+monitor_changes() {
+    case "$WM" in
+        "hyprland")
+            socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
+              stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}'
+            ;;
+        "bspwm")
+            bspc subscribe desktop | while read -r line; do
+                get_active_workspace_bspwm
+            done
+            ;;
+        *)
+            while true; do
+                sleep 1
+                get_active_workspace
+            done
+            ;;
+    esac
+}
+
+get_active_workspace
+
+monitor_changes

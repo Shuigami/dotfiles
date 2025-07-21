@@ -146,10 +146,13 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 exec xrandr --output HDMI1 --auto --right-of eDP1
-exec feh --bg-fill ~/Pictures/Wallpaper/bg1.jpg
-exec compton
+exec xrandr --output DP2 --auto --right-of eDP1
+exec feh --bg-fill ~/Pictures/Wallpaper/wp8.jpg
+# exec compton
 exec polybar
-exec setxkbmap -option "caps:swapescape" -layout us -variant intl
+exec --no-startup-id fcitx5
+exec --no-startup-id xinput set-prop 9 "libinput Natural Scrolling Enabled" 1
+exec picom
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -186,10 +189,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 for_window [class=".*"] border pixel 4
+for_window [class="Eww"] border none, floating enable, sticky enable
 for_window [class=".*"] title_format " %title"
+for_window [class="eww-bar"] floating disable
+for_window [title="bar"] floating disable
 gaps inner 5
 
-smart_borders on
+# smart_borders on
 # border_radius 3
 
 # colour of border, background, text, indicator, and child_border
@@ -199,10 +205,10 @@ smart_borders on
 # Red
 # client.focused              #bf616a #bf616a #d8dee8 #bf616a #bf616a
 # Blue
-client.focused              #4287f5 #4287f5 #4287f5 #4287f5 #4287f5
 
-client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.urgent               #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.placeholder          #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.focused              #77997e #77997e #ffffff #77997e #77997e
+client.focused_inactive     #595959 #595959 #d8dee8 #595959 #595959
+client.unfocused            #595959 #595959 #d8dee8 #595959 #595959
+client.urgent               #595959 #595959 #d8dee8 #595959 #595959
+client.placeholder          #595959 #595959 #d8dee8 #595959 #595959
 client.background           #2f343f

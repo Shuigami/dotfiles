@@ -2,17 +2,93 @@
 # wm independent hotkeys
 #
 
+# Volume control
+XF86AudioMute
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+XF86AudioLowerVolume
+	pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+XF86AudioRaiseVolume
+	pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+# Brightness control
+XF86MonBrightnessDown
+	light -U 5
+
+XF86MonBrightnessUp
+	light -A 5
+
+# System control
+XF86Sleep
+	systemctl suspend
+
+# Application shortcuts
+XF86HomePage
+	firefox
+
+XF86Mail
+	thunderbird
+
+XF86Calculator
+	speedcrunch
+
 # terminal emulator
 super + Return
 	alacritty -o font.size=8
 
 # program launcher
-super + @space
-	dmenu_run
+super + d
+	~/.config/rofi/dmenu/launcher.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+# additional i3-like keybindings
+# rofi powermenu
+super + shift + e
+	~/.config/rofi/powermenu/powermenu.sh
+
+# screenshot
+super + p
+	flameshot gui
+
+# lock screen
+super + shift + p
+	betterlockscreen -l
+
+# split horizontal
+super + h
+	bspc node -p west
+
+# split vertical
+super + v
+	bspc node -p south
+
+# layout stacking (monocle in bspwm)
+super + s
+	bspc desktop -l next
+
+# layout tabbed (monocle in bspwm)
+super + z
+	bspc desktop -l next
+
+# toggle split (not directly applicable to bspwm)
+super + e
+	bspc node -p cancel
+
+# toggle floating
+super + shift + space
+	bspc node -t floating
+
+# focus mode toggle (between tiling and floating)
+super + space
+	bspc node -f {next,prev}.local.floating
+
+# focus parent
+super + q
+	bspc node -f @parent
 
 #
 # bspwm hotkeys
@@ -24,7 +100,7 @@ super + alt + {q,r}
 
 # close and kill
 super + shift + q
-	bspc node -{c,k}
+	bspc node -k
 
 # alternate between the tiled and monocle layout
 super + m
@@ -42,9 +118,9 @@ super + g
 # state/flags
 #
 
-# set the window state
-super + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+# toggle the window state
+super + f
+	bspc node -t {fullscreen,tiled}
 
 # set the node flags
 super + ctrl + {m,x,y,z}
@@ -55,7 +131,11 @@ super + ctrl + {m,x,y,z}
 #
 
 # focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
+super + {_,shift + }{j,k,l,m}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node in the given direction (arrow keys)
+super + {_,shift + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
@@ -89,7 +169,7 @@ super + {_,shift + }{1-9,0}
 #
 
 # preselect the direction
-super + ctrl + {h,j,k,l}
+super + ctrl + {j,k,l,m}
 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
@@ -109,13 +189,13 @@ super + ctrl + shift + space
 #
 
 # expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
+super + alt + {j,k,l,m}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
+super + alt + shift + {j,k,l,m}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
-super + {Left,Down,Up,Right}
+super + ctrl + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
