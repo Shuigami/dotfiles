@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Io
+import QtQuick.Controls
 
 
 Rectangle {
@@ -11,6 +12,7 @@ Rectangle {
     property bool charging: false
     property bool low: false
     property bool superlow: false
+    property string batteryPercentage: ""
 
     color: "transparent"
 
@@ -32,6 +34,56 @@ Rectangle {
 
     }
 
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        hoverEnabled: true
+
+        onEntered: batteryWindow.visible = true
+        onExited: batteryWindow.visible = false
+    }
+
+    Window {
+        id: batteryWindow
+        visible: false
+        flags: Qt.ToolTip | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
+        color: "transparent"
+
+        x: parent.mapToGlobal(0, 0).x + parent.width / 2 - width / 2
+        y: parent.mapToGlobal(0, 0).y + parent.height + 5
+
+        width: popupText.implicitWidth + 20
+        height: popupText.implicitHeight + 16
+
+        Rectangle {
+            anchors.fill: parent
+            color: "#0b1123"
+            border.color: "#77977e"
+            border.width: 1
+            radius: 6
+
+            Rectangle {
+                anchors.fill: parent
+                anchors.margins: 1
+                color: "transparent"
+                border.color: "#000000"
+                border.width: 1
+                radius: parent.radius
+                opacity: 0.3
+                z: -1
+            }
+        }
+
+        Text {
+            id: popupText
+            anchors.centerIn: parent
+            text: batteryPercentage
+            color: "#77977e"
+            font.family: "Rubik"
+            font.pixelSize: 12
+            font.weight: Font.Medium
+        }
+    }
 
     Process {
         id: batteryIcon
@@ -50,8 +102,11 @@ Rectangle {
 
         stdout: StdioCollector {
             onStreamFinished: {
-                low = parseInt(this.text.trim()) < 20
-                superlow = parseInt(this.text.trim()) < 10
+                var percentageStr = this.text.trim()
+                batteryPercentage = percentageStr + "%"
+                var percentageInt = parseInt(percentageStr)
+                low = percentageInt < 20
+                superlow = percentageInt < 10
             }
         }
     }
