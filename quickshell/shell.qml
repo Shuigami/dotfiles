@@ -1,9 +1,7 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
-import Quickshell.Io
 
-import "widget"
+import "component"
 
 PanelWindow {
     id: root
@@ -23,9 +21,13 @@ PanelWindow {
         radius: 8
         color: "#0b1123"
         // color: "#0b11ff"
+        border.color: "#77977e"
+        border.width: 2
 
         opacity: 0.9
 
         Workspaces {}
+
+        Clock {}
     }
 }

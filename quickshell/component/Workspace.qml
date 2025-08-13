@@ -18,10 +18,9 @@ Rectangle {
 
         text: parent.active ? "" : parent.occupied ? "" : ""
 
-        //       
-
-        color: "#d0d0d0"
+        color: "#77977e"
         font.pixelSize: 14
         anchors.centerIn: parent
+        anchors.verticalCenterOffset: 1
     }    
 }

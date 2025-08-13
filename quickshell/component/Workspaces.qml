@@ -10,7 +10,7 @@ RowLayout {
         top: parent.top
         bottom: parent.bottom
     }
-    anchors.margins: 4
+    anchors.leftMargin: 10
 
     Process {
         id: workspace
