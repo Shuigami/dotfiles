@@ -16,11 +16,15 @@ PanelWindow {
 
     Rectangle {
         anchors.fill: parent
-        anchors.margins: 8
+        anchors {
+            leftMargin: 8
+            topMargin: -8
+            rightMargin: 8
+            bottomMargin: 8
+        }
         
         radius: 8
         color: "#0b1123"
-        // color: "#0b11ff"
         border.color: "#77977e"
         border.width: 2
 
@@ -29,5 +33,7 @@ PanelWindow {
         Workspaces {}
 
         Clock {}
+
+        RightWrapper {}
     }
 }

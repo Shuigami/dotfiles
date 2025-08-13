@@ -12,7 +12,7 @@ Rectangle {
     Text {
         id: clock
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: 1
+        anchors.verticalCenterOffset: 2
 
         font.pixelSize: 16
         font.family: "Rubik"

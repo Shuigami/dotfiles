@@ -72,8 +72,8 @@ run_cmd() {
 		elif [[ $1 == '--suspend' ]]; then
             mpc -q pause
             amixer set Master mute
-			sleep 0.15
 			~/.config/i3/scripts/lock.sh
+			sleep 0.5
             systemctl suspend
 		elif [[ $1 == '--logout' ]]; then
             run_logout

@@ -21,6 +21,6 @@ Rectangle {
         color: "#77977e"
         font.pixelSize: 14
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: 1
+        anchors.verticalCenterOffset: 2
     }    
 }
