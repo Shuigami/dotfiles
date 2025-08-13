@@ -6,18 +6,16 @@ import QtQuick.Controls
 
 Rectangle {
     implicitHeight: parent.height
-    implicitWidth: batteryLayout.implicitWidth
+    implicitWidth: bluetoothLayout.implicitWidth
 
-    property string chargingIcon: "󱐋"
-    property bool charging: false
-    property bool low: false
-    property bool superlow: false
-    property string batteryPercentage: ""
+    property bool off: false
+    property bool connected: false
+    property string bluetoothName: ""
 
     color: "transparent"
 
     RowLayout {
-        id: batteryLayout
+        id: bluetoothLayout
         anchors.verticalCenter: parent.verticalCenter
         spacing: 5
 
@@ -28,7 +26,7 @@ Rectangle {
             anchors.verticalCenterOffset: 1
             font.family: "Rubik"
             font.weight: Font.Medium
-            color: low ? superlow ? "#ff5e5e" : "#e6e682" : "#77977e"
+            color: off ? "#263b37" : connected ? "#77977e" : "#263b37"
             Layout.alignment: Qt.AlignVCenter
         }
 
@@ -39,12 +37,12 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
 
-        onEntered: batteryWindow.visible = true
-        onExited: batteryWindow.visible = false
+        onEntered: bluetoothWindow.visible = true
+        onExited: bluetoothWindow.visible = false
     }
 
     Window {
-        id: batteryWindow
+        id: bluetoothWindow
         visible: false
         flags: Qt.ToolTip | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
         color: "transparent"
@@ -78,7 +76,7 @@ Rectangle {
         Text {
             id: popupText
             anchors.centerIn: parent
-            text: batteryPercentage
+            text: bluetoothName
             color: "#77977e"
             font.family: "Rubik"
             font.pixelSize: 12
@@ -86,50 +84,52 @@ Rectangle {
         }
     }
 
+
     Process {
-        id: batteryIcon
-        command: ["/home/shui/.config/quickshell/script/battery.sh", "icon"]
+        id: bluetoothIcon
+        command: ["/home/shui/.config/quickshell/script/bluetooth.sh", "icon"]
         running: true
 
         stdout: StdioCollector {
-            onStreamFinished: icon.text = charging ? chargingIcon : this.text.trim()
+            onStreamFinished: icon.text = this.text.trim()
         }
     }
 
     Process {
-        id: batteryNum
-        command: ["/home/shui/.config/quickshell/script/battery.sh", "num"]
+        id: bluetoothStatus
+        command: ["/home/shui/.config/quickshell/script/bluetooth.sh", "status"]
         running: true
 
         stdout: StdioCollector {
             onStreamFinished: {
-                var percentageStr = this.text.trim()
-                batteryPercentage = percentageStr + "%"
-                var percentageInt = parseInt(percentageStr)
-                low = percentageInt < 20
-                superlow = percentageInt < 10
+                let status = this.text.trim()
+                off = (status === "off")
+                connected = (status === "connected")
+
+                if (connected) {
+                    bluetoothNameProc.running = true
+                }
             }
         }
     }
 
     Process {
-        id: batteryStatus
-        command: ["/home/shui/.config/quickshell/script/battery.sh", "charging"]
+        id: bluetoothNameProc
+        command: ["/home/shui/.config/quickshell/script/bluetooth.sh", "name"]
         running: true
 
         stdout: StdioCollector {
-            onStreamFinished: charging = this.text == "Charging"
+            onStreamFinished: bluetoothName = this.text.trim()
         }
     }
 
     Timer {
-        interval: 5000
+        interval: 1000
         running: true
         repeat: true
         onTriggered: {
-            batteryIcon.running = true
-            batteryNum.running = true
-            batteryStatus.running = true
+            bluetoothIcon.running = true
+            bluetoothStatus.running = true
         }
     }
 }
