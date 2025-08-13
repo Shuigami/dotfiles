@@ -27,5 +27,6 @@ Rectangle {
         Battery {}
         Bluetooth {}
         Sound {}
+        Light {}
     }
 }
