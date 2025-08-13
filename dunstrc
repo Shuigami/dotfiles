@@ -33,7 +33,7 @@
     origin = top-right
 
     # Offset from the origin
-    offset = 10x10
+    offset = 10x60
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -336,14 +336,14 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#0b1123"
     # foreground = "#888888"
-    timeout = 10
+    timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
     #default_icon = /path/to/icon
 
 [urgency_normal]
     background = "#0b1123"
     # foreground = "#cdd6f4"
-    timeout = 10
+    timeout = 5
     override_pause_level = 30
     # Icon for notifications with normal urgency, uncomment to enable
     #default_icon = /path/to/icon

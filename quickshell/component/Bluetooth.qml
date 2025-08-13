@@ -37,8 +37,9 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
 
-        onEntered: bluetoothWindow.visible = true
+        onEntered: if (connected) bluetoothWindow.visible = true
         onExited: bluetoothWindow.visible = false
+        onClicked: bluetoothToggle.running = true
     }
 
     Window {
@@ -96,6 +97,18 @@ Rectangle {
     }
 
     Process {
+        id: bluetoothToggle
+        command: ["/home/shui/.config/quickshell/script/bluetooth.sh", "toggle"]
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                let lines = this.text.trim().split("\n")
+                if (lines[lines.length - 1] === "off") bluetoothWindow.visible = false
+            }
+        }
+    }
+
+    Process {
         id: bluetoothStatus
         command: ["/home/shui/.config/quickshell/script/bluetooth.sh", "status"]
         running: true
@@ -124,7 +137,7 @@ Rectangle {
     }
 
     Timer {
-        interval: 1000
+        interval: 100
         running: true
         repeat: true
         onTriggered: {

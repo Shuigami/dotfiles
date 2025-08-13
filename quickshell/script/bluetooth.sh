@@ -28,6 +28,17 @@ name() {
   bluetoothctl info | grep "Name:" | awk '{for(i=2;i<=NF;i++) printf $i " "; print ""}' | sed 's/ $//'
 }
 
+toggle() {
+  if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]; then
+    bluetoothctl power on
+    echo "on"
+  else
+    bluetoothctl power off
+    echo "off"
+  fi
+}
+
 [ "$1" = "icon" ] && icon && exit
 [ "$1" = "status" ] && status && exit
 [ "$1" = "name" ] && name && exit
+[ "$1" = "toggle" ] && toggle && exit
