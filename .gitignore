@@ -24,6 +24,8 @@
 !hypr/**
 !i3/
 !i3/**
+!quickshell/
+!quickshell/**
 !neofetch/
 !neofetch/**
 !nvim/

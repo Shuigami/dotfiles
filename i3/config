@@ -148,7 +148,6 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 exec xrandr --output HDMI1 --auto --right-of eDP1
 exec xrandr --output DP2 --auto --right-of eDP1
 exec feh --bg-fill ~/Pictures/Wallpaper/wp8.jpg
-# exec compton
 exec polybar
 exec --no-startup-id fcitx5
 exec --no-startup-id xinput set-prop 9 "libinput Natural Scrolling Enabled" 1
@@ -187,12 +186,10 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+bindsym $mod+Shift+f exec --no-startup-id ~/.config/i3/scripts/toggle_all_floating.sh toggle
 
 for_window [class=".*"] border pixel 4
-for_window [class="Eww"] border none, floating enable, sticky enable
 for_window [class=".*"] title_format " %title"
-for_window [class="eww-bar"] floating disable
-for_window [title="bar"] floating disable
 gaps inner 5
 
 # smart_borders on

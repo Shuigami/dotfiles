@@ -1,6 +1,6 @@
 ;; ----------------================ LEFT-PART ================---------------- ;;
-(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
-(deflisten current_workspace :initial "0" "bash ~/.config/eww/scripts/get-active-workspace")
+(deflisten workspaces :initial "[]" "scripts/get-workspaces")
+(deflisten current_workspace :initial "0" "scripts/get-active-workspace")
 (defpoll title :interval "1s" "scripts/music --title")
 (defpoll cover :interval "1s" "scripts/music --art")
 

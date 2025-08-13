@@ -72,9 +72,9 @@ run_cmd() {
 		elif [[ $1 == '--suspend' ]]; then
             mpc -q pause
             amixer set Master mute
+			sleep 0.15
+			~/.config/i3/scripts/lock.sh
             systemctl suspend
-            swaylock
-            betterlockscreen -l
 		elif [[ $1 == '--logout' ]]; then
             run_logout
 		fi
@@ -115,7 +115,8 @@ case ${chosen} in
 		run_cmd --hibernate
         ;;
     $lock)
-        swaylock
+		sleep 0.15
+		~/.config/i3/scripts/lock.sh
         ;;
     $suspend)
 		run_cmd --suspend
