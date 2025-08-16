@@ -24,8 +24,8 @@ PanelWindow {
         }
         
         radius: 8
-        color: "#0b1123"
-        border.color: "#77977e"
+        color: ColorLoader.getColor("bg")
+        border.color: ColorLoader.getColor("fg")
         border.width: 2
 
         opacity: 0.9

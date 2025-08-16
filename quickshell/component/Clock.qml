@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell.Io
 
+import "../"
 
 Rectangle {
     implicitHeight: parent.height
@@ -18,7 +19,7 @@ Rectangle {
         font.family: "Rubik"
         font.weight: Font.Medium
 
-        color: "#77977e"
+        color: ColorLoader.getColor("fg")
 
         Process {
             id: dateProc

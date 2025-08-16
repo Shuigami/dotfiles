@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell.Io
 import QtQuick.Controls
 
+import "../"
 
 Rectangle {
     implicitHeight: parent.height
@@ -21,12 +22,11 @@ Rectangle {
         Text {
             id: icon
             font.pixelSize: 12
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.verticalCenterOffset: 2
             font.family: "Rubik"
             font.weight: Font.Medium
-            color: mute ? "#263b37" : "#77977e"
+            color: mute ? ColorLoader.getColor("desactive") : ColorLoader.getColor("fg")
             Layout.alignment: Qt.AlignVCenter
+            Layout.topMargin: 4
         }
 
     }
@@ -55,28 +55,17 @@ Rectangle {
         Rectangle {
             id: tooltip
             anchors.fill: parent
-            color: "#0b1123"
-            border.color: "#77977e"
+            color: ColorLoader.getColor("bg")
+            border.color: ColorLoader.getColor("fg")
             border.width: 1
             radius: 6
-
-            Rectangle {
-                anchors.fill: parent
-                anchors.margins: 1
-                color: "transparent"
-                border.color: "#000000"
-                border.width: 1
-                radius: parent.radius
-                opacity: 0.3
-                z: -1
-            }
         }
 
         Text {
             id: popupText
             anchors.centerIn: parent
             text: soundPercentage
-            color: "#77977e"
+            color: ColorLoader.getColor("fg")
             font.family: "Rubik"
             font.pixelSize: 12
             font.weight: Font.Medium

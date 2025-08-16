@@ -57,6 +57,7 @@ RowLayout {
                 let occupied = this.text.trim().split("\n")
                 for (let i = 0; i < row.children.length; i++) {
                     let child = row.children[i]
+                    child.isMusic = (child.workspaceText === "MUSIC")
                     child.occupied = occupied.includes(child.workspaceText)
                 }
             }

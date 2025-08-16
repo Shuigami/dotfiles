@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell.Io
 import QtQuick.Controls
 
+import "../"
 
 Rectangle {
     implicitHeight: parent.height
@@ -24,12 +25,11 @@ Rectangle {
         Text {
             id: icon
             font.pixelSize: 16
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.verticalCenterOffset: 1
             font.family: "Rubik"
             font.weight: Font.Medium
-            color: low ? superlow ? "#ff5e5e" : "#e6e682" : "#77977e"
+            color: low ? superlow ? ColorLoader.getColor("red") : ColorLoader.getColor("yellow") : ColorLoader.getColor("fg")
             Layout.alignment: Qt.AlignVCenter
+            Layout.topMargin: 4
         }
 
     }
@@ -58,28 +58,17 @@ Rectangle {
         Rectangle {
             id: tooltip
             anchors.fill: parent
-            color: "#0b1123"
-            border.color: "#77977e"
+            color: ColorLoader.getColor("bg")
+            border.color: ColorLoader.getColor("fg")
             border.width: 1
             radius: 6
-
-            Rectangle {
-                anchors.fill: parent
-                anchors.margins: 1
-                color: "transparent"
-                border.color: "#000000"
-                border.width: 1
-                radius: parent.radius
-                opacity: 0.3
-                z: -1
-            }
         }
 
         Text {
             id: popupText
             anchors.centerIn: parent
             text: batteryPercentage
-            color: "#77977e"
+            color: ColorLoader.getColor("fg")
             font.family: "Rubik"
             font.pixelSize: 12
             font.weight: Font.Medium
@@ -118,7 +107,7 @@ Rectangle {
         running: true
 
         stdout: StdioCollector {
-            onStreamFinished: charging = this.text == "Charging"
+            onStreamFinished: charging = this.text.trim() === "Charging"
         }
     }
 
@@ -129,6 +118,14 @@ Rectangle {
         onTriggered: {
             batteryIcon.running = true
             batteryNum.running = true
+        }
+    }
+
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: {
             batteryStatus.running = true
         }
     }
