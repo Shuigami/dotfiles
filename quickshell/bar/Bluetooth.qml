@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import Quickshell.Io
 import QtQuick.Controls
 
-import "../"
+import "../utils/"
 
 Rectangle {
     implicitHeight: parent.height

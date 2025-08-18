@@ -3,22 +3,19 @@ import QtQuick.Layouts
 import Quickshell.Io
 import QtQuick.Controls
 
-import "../"
+import "../utils/"
 
 Rectangle {
     implicitHeight: parent.height
-    implicitWidth: batteryLayout.implicitWidth
+    implicitWidth: lightLayout.implicitWidth
 
-    property string chargingIcon: "󱐋"
-    property bool charging: false
-    property bool low: false
-    property bool superlow: false
-    property string batteryPercentage: ""
+    property bool mute: false
+    property string lightPercentage: ""
 
     color: "transparent"
 
     RowLayout {
-        id: batteryLayout
+        id: lightLayout
         anchors.verticalCenter: parent.verticalCenter
         spacing: 5
 
@@ -27,7 +24,7 @@ Rectangle {
             font.pixelSize: 16
             font.family: "Rubik"
             font.weight: Font.Medium
-            color: low ? superlow ? ColorLoader.getColor("red") : ColorLoader.getColor("yellow") : ColorLoader.getColor("fg")
+            color: mute ? ColorLoader.getColor("desactive") : ColorLoader.getColor("fg")
             Layout.alignment: Qt.AlignVCenter
             Layout.topMargin: 4
         }
@@ -39,12 +36,12 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
 
-        onEntered: batteryWindow.visible = true
-        onExited: batteryWindow.visible = false
+        onEntered: lightWindow.visible = true
+        onExited: lightWindow.visible = false
     }
 
     Window {
-        id: batteryWindow
+        id: lightWindow
         visible: false
         flags: Qt.ToolTip | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
         color: "transparent"
@@ -67,7 +64,7 @@ Rectangle {
         Text {
             id: popupText
             anchors.centerIn: parent
-            text: batteryPercentage
+            text: lightPercentage
             color: ColorLoader.getColor("fg")
             font.family: "Rubik"
             font.pixelSize: 12
@@ -76,57 +73,37 @@ Rectangle {
     }
 
     Process {
-        id: batteryIcon
-        command: ["/home/shui/.config/quickshell/script/battery.sh", "icon"]
-        running: true
-
-        stdout: StdioCollector {
-            onStreamFinished: icon.text = charging ? chargingIcon : this.text.trim()
-        }
-    }
-
-    Process {
-        id: batteryNum
-        command: ["/home/shui/.config/quickshell/script/battery.sh", "num"]
+        id: lightIcon
+        command: ["/home/shui/.config/quickshell/script/light.sh", "icon"]
         running: true
 
         stdout: StdioCollector {
             onStreamFinished: {
-                var percentageStr = this.text.trim()
-                batteryPercentage = percentageStr + "%"
-                var percentageInt = parseInt(percentageStr)
-                low = percentageInt < 20
-                superlow = percentageInt < 10
+                icon.text = this.text.trim()
             }
         }
     }
 
     Process {
-        id: batteryStatus
-        command: ["/home/shui/.config/quickshell/script/battery.sh", "charging"]
+        id: lightNum
+        command: ["/home/shui/.config/quickshell/script/light.sh", "num"]
         running: true
 
         stdout: StdioCollector {
-            onStreamFinished: charging = this.text.trim() === "Charging"
+            onStreamFinished: {
+                var percentageStr = this.text.trim()
+                lightPercentage = percentageStr + "%"
+            }
         }
     }
 
     Timer {
-        interval: 5000
+        interval: 100
         running: true
         repeat: true
         onTriggered: {
-            batteryIcon.running = true
-            batteryNum.running = true
-        }
-    }
-
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: {
-            batteryStatus.running = true
+            lightIcon.running = true
+            lightNum.running = true
         }
     }
 }

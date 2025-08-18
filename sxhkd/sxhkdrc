@@ -38,7 +38,7 @@ super + Return
 	alacritty -o font.size=8
 
 # program launcher
-super + d
+super + alt + d
 	~/.config/rofi/dmenu/launcher.sh
 
 # make sxhkd reload its configuration files:
@@ -199,3 +199,12 @@ super + alt + shift + {j,k,l,m}
 # move a floating window
 super + ctrl + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+
+#
+# Quickshell Shortcut
+#
+
+# Dmenu toggle
+super + d
+	node ~/.config/quickshell/script/boolean.js toggle

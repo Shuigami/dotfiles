@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import Quickshell.Io
 
-import "../"
+import "../utils/"
 
 Rectangle {
     property string workspaceText: ""

@@ -3,28 +3,31 @@ import QtQuick.Layouts
 import Quickshell.Io
 import QtQuick.Controls
 
-import "../"
+import "../utils"
 
 Rectangle {
     implicitHeight: parent.height
-    implicitWidth: soundLayout.implicitWidth
+    implicitWidth: batteryLayout.implicitWidth
 
-    property bool mute: false
-    property string soundPercentage: ""
+    property string chargingIcon: "󱐋"
+    property bool charging: false
+    property bool low: false
+    property bool superlow: false
+    property string batteryPercentage: ""
 
     color: "transparent"
 
     RowLayout {
-        id: soundLayout
+        id: batteryLayout
         anchors.verticalCenter: parent.verticalCenter
         spacing: 5
 
         Text {
             id: icon
-            font.pixelSize: 12
+            font.pixelSize: 16
             font.family: "Rubik"
             font.weight: Font.Medium
-            color: mute ? ColorLoader.getColor("desactive") : ColorLoader.getColor("fg")
+            color: low ? superlow ? ColorLoader.getColor("red") : ColorLoader.getColor("yellow") : ColorLoader.getColor("fg")
             Layout.alignment: Qt.AlignVCenter
             Layout.topMargin: 4
         }
@@ -36,12 +39,12 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
 
-        onEntered: soundWindow.visible = true
-        onExited: soundWindow.visible = false
+        onEntered: batteryWindow.visible = true
+        onExited: batteryWindow.visible = false
     }
 
     Window {
-        id: soundWindow
+        id: batteryWindow
         visible: false
         flags: Qt.ToolTip | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
         color: "transparent"
@@ -64,7 +67,7 @@ Rectangle {
         Text {
             id: popupText
             anchors.centerIn: parent
-            text: soundPercentage
+            text: batteryPercentage
             color: ColorLoader.getColor("fg")
             font.family: "Rubik"
             font.pixelSize: 12
@@ -73,39 +76,57 @@ Rectangle {
     }
 
     Process {
-        id: soundIcon
-        command: ["/home/shui/.config/quickshell/script/sound.sh", "icon"]
+        id: batteryIcon
+        command: ["/home/shui/.config/quickshell/script/battery.sh", "icon"]
         running: true
 
         stdout: StdioCollector {
-            onStreamFinished: {
-                icon.text = this.text.trim()
-
-                mute = (icon.text === "󰝟")
-            }
+            onStreamFinished: icon.text = charging ? chargingIcon : this.text.trim()
         }
     }
 
     Process {
-        id: soundNum
-        command: ["/home/shui/.config/quickshell/script/sound.sh", "num"]
+        id: batteryNum
+        command: ["/home/shui/.config/quickshell/script/battery.sh", "num"]
         running: true
 
         stdout: StdioCollector {
             onStreamFinished: {
                 var percentageStr = this.text.trim()
-                soundPercentage = percentageStr + "%"
+                batteryPercentage = percentageStr + "%"
+                var percentageInt = parseInt(percentageStr)
+                low = percentageInt < 20
+                superlow = percentageInt < 10
             }
         }
     }
 
+    Process {
+        id: batteryStatus
+        command: ["/home/shui/.config/quickshell/script/battery.sh", "charging"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: charging = this.text.trim() === "Charging"
+        }
+    }
+
     Timer {
-        interval: 100
+        interval: 5000
         running: true
         repeat: true
         onTriggered: {
-            soundIcon.running = true
-            soundNum.running = true
+            batteryIcon.running = true
+            batteryNum.running = true
+        }
+    }
+
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: {
+            batteryStatus.running = true
         }
     }
 }

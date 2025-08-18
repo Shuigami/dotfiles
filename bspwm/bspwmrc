@@ -3,11 +3,17 @@
 sxhkd &
 
 ~/.config/bspwm/cider_autorule.sh &
-cider &
+# ~/.config/bspwm/dmenu_floating.sh &
+# cider &
 
 picom &
 
-quickshell &
+killall quickshell || true && sleep 0.5 && quickshell &
+
+bspc config left_padding 0
+bspc config right_padding 0
+bspc config top_padding 0
+bspc config bottom_padding 0
 
 feh --bg-fill ~/Pictures/Wallpaper/wp8.jpg
 
@@ -21,7 +27,11 @@ pgrep -x music-cleaner >/dev/null || (
         MUSIC_CLASS="Cider"
         while sleep 2; do
             for wid in $(bspc query -N -d "$MUSIC_DESK" -n .window); do
-                class=$(bspc query -T -n "$wid" | jq -r '.client.className // empty')
+                info=$(bspc query -T -n "$wid")
+                # Use xprop for reliable WM_NAME lookup (some apps don't populate bspc .client.title)
+                title=$(xprop -id "$wid" WM_NAME 2>/dev/null | sed -n 's/WM_NAME(UTF8_STRING) = "\(.*\)"/\1/p; s/WM_NAME(STRING) = "\(.*\)"/\1/p')
+                [ "$title" = "dmenu" ] && continue
+                class=$(printf '%s' "$info" | jq -r '.client.className // empty')
                 [ "$class" != "$MUSIC_CLASS" ] && bspc node "$wid" -d next.local
             done
         done
@@ -44,3 +54,4 @@ bspc config presel_feedback_color      "#fab387"
 
 bspc rule -a zen border=off
 bspc rule -a i3lock state=floating
+bspc rule -a "*:*:dmenu" state=floating border=off center=true

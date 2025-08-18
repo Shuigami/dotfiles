@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell.Io
 
-import "../"
+import "../utils/"
 
 Rectangle {
     implicitHeight: parent.height

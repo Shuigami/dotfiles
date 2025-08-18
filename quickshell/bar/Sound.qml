@@ -3,25 +3,25 @@ import QtQuick.Layouts
 import Quickshell.Io
 import QtQuick.Controls
 
-import "../"
+import "../utils/"
 
 Rectangle {
     implicitHeight: parent.height
-    implicitWidth: lightLayout.implicitWidth
+    implicitWidth: soundLayout.implicitWidth
 
     property bool mute: false
-    property string lightPercentage: ""
+    property string soundPercentage: ""
 
     color: "transparent"
 
     RowLayout {
-        id: lightLayout
+        id: soundLayout
         anchors.verticalCenter: parent.verticalCenter
         spacing: 5
 
         Text {
             id: icon
-            font.pixelSize: 16
+            font.pixelSize: 12
             font.family: "Rubik"
             font.weight: Font.Medium
             color: mute ? ColorLoader.getColor("desactive") : ColorLoader.getColor("fg")
@@ -36,12 +36,12 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
 
-        onEntered: lightWindow.visible = true
-        onExited: lightWindow.visible = false
+        onEntered: soundWindow.visible = true
+        onExited: soundWindow.visible = false
     }
 
     Window {
-        id: lightWindow
+        id: soundWindow
         visible: false
         flags: Qt.ToolTip | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
         color: "transparent"
@@ -64,7 +64,7 @@ Rectangle {
         Text {
             id: popupText
             anchors.centerIn: parent
-            text: lightPercentage
+            text: soundPercentage
             color: ColorLoader.getColor("fg")
             font.family: "Rubik"
             font.pixelSize: 12
@@ -73,26 +73,28 @@ Rectangle {
     }
 
     Process {
-        id: lightIcon
-        command: ["/home/shui/.config/quickshell/script/light.sh", "icon"]
+        id: soundIcon
+        command: ["/home/shui/.config/quickshell/script/sound.sh", "icon"]
         running: true
 
         stdout: StdioCollector {
             onStreamFinished: {
                 icon.text = this.text.trim()
+
+                mute = (icon.text === "󰝟")
             }
         }
     }
 
     Process {
-        id: lightNum
-        command: ["/home/shui/.config/quickshell/script/light.sh", "num"]
+        id: soundNum
+        command: ["/home/shui/.config/quickshell/script/sound.sh", "num"]
         running: true
 
         stdout: StdioCollector {
             onStreamFinished: {
                 var percentageStr = this.text.trim()
-                lightPercentage = percentageStr + "%"
+                soundPercentage = percentageStr + "%"
             }
         }
     }
@@ -102,8 +104,8 @@ Rectangle {
         running: true
         repeat: true
         onTriggered: {
-            lightIcon.running = true
-            lightNum.running = true
+            soundIcon.running = true
+            soundNum.running = true
         }
     }
 }
