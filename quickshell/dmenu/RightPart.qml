@@ -123,8 +123,8 @@ Rectangle {
             right: parent.right
             margins: 12
         }
-    clip: true
-    spacing: 6
+        clip: true
+        spacing: 6
         highlightMoveDuration: 80
         currentIndex: selectedIndex
         model: filteredApps
@@ -137,7 +137,7 @@ Rectangle {
             Rectangle {
                 anchors.fill: parent
                 radius: 6
-                color: index === selectedIndex ? ColorLoader.getColor("transparency") + ColorLoader.getColor("fg").substring(1) : "transparent"
+                color: index === selectedIndex ? ColorLoader.getColor("opacity-clear") + ColorLoader.getColor("fg").substring(1) : "transparent"
             }
 
             Row {
@@ -214,7 +214,7 @@ Rectangle {
 
     Process {
         id: dmenuToggleProcess
-        command: ["node", "/home/shui/.config/quickshell/script/boolean.js", "toggle"]
+        command: ["node", "/home/shui/.config/quickshell/script/boolean.js", "dmenu-toggle"]
         running: false
     }
 }

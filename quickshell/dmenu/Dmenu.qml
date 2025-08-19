@@ -5,14 +5,14 @@ import QtQuick.Controls
 import "../utils"
 
 FloatingWindow {
-    id: myWindow
+    id: dmenuWindow
     implicitWidth: 1000
     implicitHeight: 500
     visible: false
     
     color: "transparent"
 
-    title: qsTr("dmenu")
+    title: "dmenu"
 
     Rectangle {
         anchors.fill: parent
@@ -23,17 +23,17 @@ FloatingWindow {
             bottomMargin: 8
         }
         radius: 10
-        color: ColorLoader.getColor("transparency") + ColorLoader.getColor("bg").substring(1)
+        color: ColorLoader.getColor("opacity-clear") + ColorLoader.getColor("bg").substring(1)
 
-    LeftPart { id: leftPart }
-    RightPart {
-        id: rightPart
-        filterText: leftPart.filterText
-        onLaunched: {
-            dmenuToggleProcess.running = true;
-            clearFilterTimer.restart();
+        LeftPart { id: leftPart }
+        RightPart {
+            id: rightPart
+            filterText: leftPart.filterText
+            onLaunched: {
+                dmenuToggleProcess.running = true;
+                clearFilterTimer.restart();
+            }
         }
-    }
 
         Timer {
             id: clearFilterTimer
@@ -74,14 +74,14 @@ FloatingWindow {
     
     Process {
         id: dmenuStatusProcess
-        command: ["node", "/home/shui/.config/quickshell/script/boolean.js", "status"]
+        command: ["node", "/home/shui/.config/quickshell/script/boolean.js", "dmenu-status"]
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
                 if (this.text.trim() === "true") {
-                    myWindow.visible = true;
+                    dmenuWindow.visible = true;
                 } else {
-                    myWindow.visible = false;
+                    dmenuWindow.visible = false;
                 }
             }
         }
@@ -89,7 +89,7 @@ FloatingWindow {
 
     Process {
         id: dmenuToggleProcess
-        command: ["node", "/home/shui/.config/quickshell/script/boolean.js", "toggle"]
+        command: ["node", "/home/shui/.config/quickshell/script/boolean.js", "dmenu-toggle"]
         running: false
     }
 

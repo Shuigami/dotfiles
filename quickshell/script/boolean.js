@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const configPath = path.join(__dirname, 'boolean.json');
+const configPath = path.join(__dirname, '../utils/utils.json');
 
 function readConfig() {
     try {
@@ -42,6 +42,17 @@ function isDmenuVisible() {
     return config.dmenuVisible;
 }
 
+function isThemeSwitcherVisible() {
+    const config = readConfig();
+    return config.themeSwitcherVisible;
+}
+
+function toggleThemeSwitcher() {
+    const config = readConfig();
+    config.themeSwitcherVisible = !config.themeSwitcherVisible;
+    writeConfig(config);
+}
+
 if (typeof process !== 'undefined' && process.argv) {
     const args = process.argv.slice(2);
     
@@ -49,15 +60,20 @@ if (typeof process !== 'undefined' && process.argv) {
         const command = args[0];
         
         switch (command) {
-            case 'toggle':
+            case 'dmenu-toggle':
                 console.log(toggleDmenu());
                 break;
-            case 'status':
-            case 'visible':
+            case 'dmenu-status':
                 console.log(isDmenuVisible());
                 break;
+            case 'theme-switcher-toggle':
+                console.log(toggleThemeSwitcher());
+                break;
+            case 'theme-switcher-status':
+                console.log(isThemeSwitcherVisible());
+                break;
             default:
-                console.log('Available commands: toggle, status, visible');
+                console.log('Available commands: dmenu-toggle, dmenu-status, theme-switcher-toggle, theme-switcher-status');
         }
     }
 }

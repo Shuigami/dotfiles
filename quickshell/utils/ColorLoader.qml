@@ -3,45 +3,54 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import QtQml
 
 Singleton {
     id: colorLoader
     property var colors: ({})
+    property int revision: 0
 
     function getColor(name) {
-        if (colors[name]) {
-            return colors[name];
-        }
+        var _ = colors;
+        return (colors && colors[name]) ? colors[name] : "transparent";
+    }
 
-        if (loadColors.running) {
-            return "transparent";
+    function reloadColors() {
+        var t = ThemeLoader.getTheme();
+        if (!t || !t.path) {
+            return;
         }
-
-        return colors[name] || "transparent";
+        loadColors.command = ["cat", t.path + "/colors.txt"];
+        loadColors.running = true;
     }
 
     Process {
         id: loadColors
-        command: ["cat", "/home/shui/.config/colors/colors.txt"]
-        running: true
+        running: false
 
         stdout: StdioCollector {
             onStreamFinished: {
-                var lines = this.text.trim().split("\n");
+                var text = this.text || "";
+                var lines = text.trim().length ? text.trim().split("\n") : [];
+                var newColors = ({});
                 for (var i = 0; i < lines.length; i++) {
                     var parts = lines[i].split(":");
                     if (parts.length === 2) {
-                        colors[parts[0].trim()] = parts[1].trim();
+                        newColors[parts[0].trim()] = parts[1].trim();
                     }
                 }
+                colorLoader.colors = newColors;
+                colorLoader.revision++;
             }
         }
     }
 
-    Timer {
-        interval: 1000
-        running: true
-        repeat: false
-        onTriggered: loadColors.running = true
+    Component.onCompleted: reloadColors()
+
+    Connections {
+        target: ThemeLoader
+        function onCurrentThemeChanged() {
+            colorLoader.reloadColors();
+        }
     }
 }

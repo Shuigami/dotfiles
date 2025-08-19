@@ -24,11 +24,9 @@ PanelWindow {
         }
         
         radius: 8
-        color: ColorLoader.getColor("bg")
+        color: ColorLoader.getColor("opacity-normal") + ColorLoader.getColor("bg").substring(1)
         border.color: ColorLoader.getColor("fg")
         border.width: 2
-
-        opacity: 0.9
 
         Workspaces {}
 

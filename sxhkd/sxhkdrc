@@ -207,4 +207,8 @@ super + ctrl + {Left,Down,Up,Right}
 
 # Dmenu toggle
 super + d
-	node ~/.config/quickshell/script/boolean.js toggle
+	node ~/.config/quickshell/script/boolean.js dmenu-toggle
+
+# Theme switcher toggle
+super + t
+	node ~/.config/quickshell/script/boolean.js theme-switcher-toggle
