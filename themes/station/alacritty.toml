@@ -1,0 +1,71 @@
+[colors.bright]
+black = "0x5c6370"
+blue = "0x61afef"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0xc678dd"
+red = "0xe06c75"
+white = "0xe6efff"
+yellow = "0xd19a66"
+
+[colors.dim]
+black = "0x1e2127"
+blue = "0x61afef"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0xc678dd"
+red = "0xe06c75"
+white = "0x828791"
+yellow = "0xd19a66"
+
+[colors.normal]
+black = "0x1e2127"
+blue = "0x61afef"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0xc678dd"
+red = "0xe06c75"
+white = "0x828791"
+yellow = "0xd19a66"
+
+[colors.primary]
+background = "#0b1123"
+bright_foreground = "0xe6efff"
+foreground = "0xabb2bf"
+
+[cursor.style]
+blinking = "Off"
+shape = "Underline"
+
+[font]
+size = 14
+
+[font.normal]
+family = 'FiraCode Nerd Font'
+style = 'Regular'
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Super|Shift"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = false
+
+[window]
+opacity = 0.95
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 15
+y = 15
+
+[general]
+live_config_reload = true

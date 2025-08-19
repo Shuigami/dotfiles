@@ -3,16 +3,13 @@ import Quickshell
 
 import "../utils"
 
-PanelWindow {
+FloatingWindow {
     id: root
-    anchors {
-        left: true
-        top: true
-        right: true
-    }
+    title: "bar"
 
     color: "transparent"
     implicitHeight: 50
+    implicitWidth: 1920
 
     Rectangle {
         anchors.fill: parent

@@ -1,0 +1,11 @@
+opacity-clear: #7f
+opacity-normal: #e6
+fg: #6A8D56
+text: #d0d0d0
+bg: #161918
+desactive: #445B37
+hover: #3F4035
+red: #ff5e5e
+red-bg: #662525
+green: #4bcc7c
+yellow: #e6e682

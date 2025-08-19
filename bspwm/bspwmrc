@@ -47,5 +47,6 @@ bspc config window_gap                 8
 
 bspc rule -a zen border=off
 bspc rule -a i3lock state=floating
+bspc rule -a "*:*:bar" state=floating border=off layer=below sticky=on rectangle=1920x50+0+0
 bspc rule -a "*:*:dmenu" state=floating border=off center=true
 bspc rule -a "*:*:theme-switcher" state=floating border=off rectangle=1000x300+460+40

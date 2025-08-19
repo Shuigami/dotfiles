@@ -88,6 +88,17 @@ function setBspwmTheme(themeName) {
 	}
 }
 
+function setVscodeTheme(themeName) {
+	try {
+		execFileSync('cp', [
+			path.join(process.env.HOME || '/home/shui', '.config', 'themes', themeName, 'vscode_settings.json'),
+			path.join(process.env.HOME || '/home/shui', '.config', 'Code', 'User', 'settings.json')
+		]);
+	} catch (err) {
+		console.error('Error setting theme in vscode:', err.message);
+	}
+}
+
 function setTheme(themeName) {
 	const cfg = readConfig();
 	cfg.theme = themeName;
@@ -96,6 +107,7 @@ function setTheme(themeName) {
 	setWallpaper(themeName);
 	setAlacrittyTheme(themeName);
 	setBspwmTheme(themeName);
+	setVscodeTheme(themeName);
 
 	return themeName;
 }

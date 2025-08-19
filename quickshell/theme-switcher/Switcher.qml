@@ -141,9 +141,12 @@ FloatingWindow {
         onActivated: {
             if (themeList.currentIndex > 0) {
                 themeList.currentIndex--;
-                themeList.positionViewAtIndex(themeList.currentIndex, ListView.Center);
-                ThemeLoader.setTheme(themes[themeList.currentIndex].name);
+            } else {
+                themeList.currentIndex = themes.length - 1;
             }
+
+            themeList.positionViewAtIndex(themeList.currentIndex, ListView.Center);
+            ThemeLoader.setTheme(themes[themeList.currentIndex].name);
         }
     }
 
@@ -152,9 +155,12 @@ FloatingWindow {
         onActivated: {
             if (themeList.currentIndex < themeList.count - 1) {
                 themeList.currentIndex++;
-                themeList.positionViewAtIndex(themeList.currentIndex, ListView.Center);
-                ThemeLoader.setTheme(themes[themeList.currentIndex].name);
+            } else {
+                themeList.currentIndex = 0;
             }
+
+            themeList.positionViewAtIndex(themeList.currentIndex, ListView.Center);
+            ThemeLoader.setTheme(themes[themeList.currentIndex].name);
         }
     }
 

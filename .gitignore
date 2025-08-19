@@ -40,6 +40,8 @@
 !swaylock/**
 !sxhkd/
 !sxhkd/**
+!themes/
+!themes/**
 !zed/
 !zed/**
 
