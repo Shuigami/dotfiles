@@ -47,7 +47,7 @@ super + Escape
 
 # additional i3-like keybindings
 # rofi powermenu
-super + shift + e
+super + alt + e
 	~/.config/rofi/powermenu/powermenu.sh
 
 # screenshot
@@ -212,3 +212,7 @@ super + d
 # Theme switcher toggle
 super + t
 	node ~/.config/quickshell/script/boolean.js theme-switcher-toggle
+
+# Powermenu toggle
+super + shift + e
+	node ~/.config/quickshell/script/boolean.js powermenu-toggle

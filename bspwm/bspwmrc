@@ -2,7 +2,7 @@
 
 sxhkd &
 
-~/.config/bspwm/cider_autorule.sh &
+# ~/.config/bspwm/cider_autorule.sh &
 # ~/.config/bspwm/dmenu_floating.sh &
 # cider &
 
@@ -19,23 +19,23 @@ bspc monitor -d MUSIC 1 2 3 4 5 6 7 8 9 10
 
 bspc rule -a Cider desktop=MUSIC
 
-pgrep -x music-cleaner >/dev/null || (
-    music-cleaner() {
-        MUSIC_DESK="MUSIC"
-        MUSIC_CLASS="Cider"
-        while sleep 2; do
-            for wid in $(bspc query -N -d "$MUSIC_DESK" -n .window); do
-                info=$(bspc query -T -n "$wid")
-                # Use xprop for reliable WM_NAME lookup (some apps don't populate bspc .client.title)
-                title=$(xprop -id "$wid" WM_NAME 2>/dev/null | sed -n 's/WM_NAME(UTF8_STRING) = "\(.*\)"/\1/p; s/WM_NAME(STRING) = "\(.*\)"/\1/p')
-                [ "$title" = "dmenu" ] && continue
-                class=$(printf '%s' "$info" | jq -r '.client.className // empty')
-                [ "$class" != "$MUSIC_CLASS" ] && bspc node "$wid" -d next.local
-            done
-        done
-    }
-    music-cleaner &
-)
+# pgrep -x music-cleaner >/dev/null || (
+#     music-cleaner() {
+#         MUSIC_DESK="MUSIC"
+#         MUSIC_CLASS="Cider"
+#         while sleep 2; do
+#             for wid in $(bspc query -N -d "$MUSIC_DESK" -n .window); do
+#                 info=$(bspc query -T -n "$wid")
+#                 # Use xprop for reliable WM_NAME lookup (some apps don't populate bspc .client.title)
+#                 title=$(xprop -id "$wid" WM_NAME 2>/dev/null | sed -n 's/WM_NAME(UTF8_STRING) = "\(.*\)"/\1/p; s/WM_NAME(STRING) = "\(.*\)"/\1/p')
+#                 [ "$title" = "dmenu" || "$title" = "theme-switcher" ] && continue
+#                 class=$(printf '%s' "$info" | jq -r '.client.className // empty')
+#                 [ "$class" != "$MUSIC_CLASS" ] && bspc node "$wid" -d next.local
+#             done
+#         done
+#     }
+#     music-cleaner &
+# )
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
@@ -47,6 +47,7 @@ bspc config window_gap                 8
 
 bspc rule -a zen border=off
 bspc rule -a i3lock state=floating
-bspc rule -a "*:*:bar" state=floating border=off layer=below sticky=on rectangle=1920x50+0+0
-bspc rule -a "*:*:dmenu" state=floating border=off center=true
-bspc rule -a "*:*:theme-switcher" state=floating border=off rectangle=1000x300+460+40
+bspc rule -a "*:*:bar" state=floating border=off layer=below sticky=on manage=off rectangle=1920x50+0+0
+bspc rule -a "*:*:dmenu" state=floating border=off sticky=on center=true
+bspc rule -a "*:*:powermenu" state=floating border=off sticky=on center=true
+bspc rule -a "*:*:theme-switcher" state=floating border=off sticky=on rectangle=1000x300+460+40

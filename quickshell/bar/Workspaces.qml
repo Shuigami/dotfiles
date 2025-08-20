@@ -14,7 +14,7 @@ RowLayout {
 
     Process {
         id: workspaceProcess
-        command: ["bspc", "subscribe", "desktop"]
+        command: ["bspc", "subscribe", "desktop", "node"]
         running: true
 
         stdout: SplitParser {
