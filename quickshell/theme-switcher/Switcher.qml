@@ -96,7 +96,7 @@ FloatingWindow {
 
             delegate: Item {
                 width: 250
-                implicitWidth: parent.height
+                implicitHeight: parent.height
 
                 property var isSelected: ThemeLoader.getTheme()?.name == modelData.name
 
