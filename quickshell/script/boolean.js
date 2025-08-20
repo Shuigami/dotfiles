@@ -4,6 +4,7 @@ const { execSync } = require('child_process');
 
 const configPath = path.join(__dirname, '../utils/utils.json');
 
+// ===== Utility functions =====
 function readConfig() {
     try {
         if (fs.existsSync(configPath)) {
@@ -16,7 +17,6 @@ function readConfig() {
         console.error('Error reading config:', error);
     }
 }
-
 function writeConfig(config) {
     try {
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
@@ -25,6 +25,7 @@ function writeConfig(config) {
     }
 }
 
+// ===== Dmenu functions =====
 function toggleDmenu() {
     const config = readConfig();
     config.dmenuVisible = !config.dmenuVisible;
@@ -36,21 +37,31 @@ function toggleDmenu() {
         }, 100);
     }
 }
-
 function isDmenuVisible() {
     const config = readConfig();
     return config.dmenuVisible;
 }
 
+// ===== Theme Switcher functions =====
+function toggleThemeSwitcher() {
+    const config = readConfig();
+    config.themeSwitcherVisible = !config.themeSwitcherVisible;
+    writeConfig(config);
+}
 function isThemeSwitcherVisible() {
     const config = readConfig();
     return config.themeSwitcherVisible;
 }
 
-function toggleThemeSwitcher() {
+// ====== Power Menu functions ======
+function togglePowerMenu() {
     const config = readConfig();
-    config.themeSwitcherVisible = !config.themeSwitcherVisible;
+    config.powerMenuVisible = !config.powerMenuVisible;
     writeConfig(config);
+}
+function isPowerMenuVisible() {
+    const config = readConfig();
+    return config.powerMenuVisible;
 }
 
 if (typeof process !== 'undefined' && process.argv) {
@@ -72,8 +83,14 @@ if (typeof process !== 'undefined' && process.argv) {
             case 'theme-switcher-status':
                 console.log(isThemeSwitcherVisible());
                 break;
+            case 'powermenu-toggle':
+                console.log(togglePowerMenu());
+                break;
+            case 'powermenu-status':
+                console.log(isPowerMenuVisible());
+                break;
             default:
-                console.log('Available commands: dmenu-toggle, dmenu-status, theme-switcher-toggle, theme-switcher-status');
+                console.log('Available commands: dmenu-toggle, dmenu-status, theme-switcher-toggle, theme-switcher-status, powermenu-toggle, powermenu-status');
         }
     }
 }

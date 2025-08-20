@@ -73,6 +73,22 @@ Rectangle {
     }
 
     Process {
+        id: lightProcess
+        command: ["udevadm", "monitor", "--udev", "--subsystem-match=backlight"]
+        running: true
+
+        stdout: SplitParser {
+            onRead: (data) => {
+                var line = data.trim()
+                if (line.indexOf("backlight") !== -1) {
+                    lightNum.running = true
+                    lightIcon.running = true
+                }
+            }
+        }
+    }
+
+    Process {
         id: lightIcon
         command: ["/home/shui/.config/quickshell/script/light.sh", "icon"]
         running: true
@@ -94,16 +110,6 @@ Rectangle {
                 var percentageStr = this.text.trim()
                 lightPercentage = percentageStr + "%"
             }
-        }
-    }
-
-    Timer {
-        interval: 100
-        running: true
-        repeat: true
-        onTriggered: {
-            lightIcon.running = true
-            lightNum.running = true
         }
     }
 }

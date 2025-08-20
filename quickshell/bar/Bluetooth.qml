@@ -74,6 +74,23 @@ Rectangle {
         }
     }
 
+    Process {
+        id: bluetoothProcess
+        command: ["hcidump", "-X"]
+        running: true
+
+        stdout: SplitParser {
+            onRead: (data) => {
+                var line = data.trim()
+                console.log(line)
+                console.log(line.startsWith("> HCI Event"))
+                if (line.startsWith("> HCI Event")) {
+                    bluetoothIcon.running = true
+                    bluetoothStatus.running = true
+                }
+            }
+        }
+    }
 
     Process {
         id: bluetoothIcon
@@ -122,16 +139,6 @@ Rectangle {
 
         stdout: StdioCollector {
             onStreamFinished: bluetoothName = this.text.trim()
-        }
-    }
-
-    Timer {
-        interval: 100
-        running: true
-        repeat: true
-        onTriggered: {
-            bluetoothIcon.running = true
-            bluetoothStatus.running = true
         }
     }
 }

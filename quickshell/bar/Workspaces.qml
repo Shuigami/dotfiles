@@ -13,6 +13,19 @@ RowLayout {
     anchors.leftMargin: 14
 
     Process {
+        id: workspaceProcess
+        command: ["bspc", "subscribe", "desktop"]
+        running: true
+
+        stdout: SplitParser {
+            onRead: (data) => {
+                activeWorkspace.running = true
+                occupiedWorkspace.running = true
+            }
+        }
+    }
+
+    Process {
         id: workspace
         running: true
         command: [ "bspc", "query", "-D", "--names" ]
@@ -27,6 +40,9 @@ RowLayout {
                         workspaceText: lines[i]
                     })
                 }
+
+                activeWorkspace.running = true
+                occupiedWorkspace.running = true
             }
         }
     }
@@ -61,16 +77,6 @@ RowLayout {
                     child.occupied = occupied.includes(child.workspaceText)
                 }
             }
-        }
-    }
-
-    Timer {
-        interval: 100
-        running: true
-        repeat: true
-        onTriggered: {
-            activeWorkspace.running = true
-            occupiedWorkspace.running = true
         }
     }
 }

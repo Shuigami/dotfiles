@@ -4,7 +4,7 @@ import Quickshell
 import "../utils"
 
 FloatingWindow {
-    id: root
+    id: bar
     title: "bar"
 
     color: "transparent"

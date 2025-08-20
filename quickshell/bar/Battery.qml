@@ -76,6 +76,19 @@ Rectangle {
     }
 
     Process {
+        id: batteryProcess
+        command: ["upower", "--monitor"]
+        running: true
+
+        stdout: SplitParser {
+            onRead: (data) => {
+                batteryNum.running = true
+                batteryIcon.running = true
+            }
+        }
+    }
+
+    Process {
         id: batteryIcon
         command: ["/home/shui/.config/quickshell/script/battery.sh", "icon"]
         running: true
@@ -108,25 +121,6 @@ Rectangle {
 
         stdout: StdioCollector {
             onStreamFinished: charging = this.text.trim() === "Charging"
-        }
-    }
-
-    Timer {
-        interval: 5000
-        running: true
-        repeat: true
-        onTriggered: {
-            batteryIcon.running = true
-            batteryNum.running = true
-        }
-    }
-
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: {
-            batteryStatus.running = true
         }
     }
 }

@@ -192,12 +192,10 @@ FloatingWindow {
         running: false
     }
 
-    
-    Timer {
-        interval: 100
-        running: true
-        repeat: true
-        onTriggered: {
+
+    Connections {
+        target: root
+        onTick: {
             themeStatusProcess.running = true;
         }
     }

@@ -93,12 +93,10 @@ FloatingWindow {
         running: false
     }
 
-    
-    Timer {
-        interval: 100
-        running: true
-        repeat: true
-        onTriggered: {
+
+    Connections {
+        target: root
+        onTick: {
             dmenuStatusProcess.running = true;
         }
     }

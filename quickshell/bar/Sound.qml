@@ -73,6 +73,22 @@ Rectangle {
     }
 
     Process {
+        id: pactlProcess
+        command: ["pactl", "subscribe"]
+        running: true
+
+        stdout: SplitParser {
+            onRead: (data) => {
+                var line = data.trim()
+                if (line.indexOf("sink") !== -1) {
+                    soundNum.running = true
+                    soundIcon.running = true
+                }
+            }
+        }
+    }
+
+    Process {
         id: soundIcon
         command: ["/home/shui/.config/quickshell/script/sound.sh", "icon"]
         running: true
@@ -96,16 +112,6 @@ Rectangle {
                 var percentageStr = this.text.trim()
                 soundPercentage = percentageStr + "%"
             }
-        }
-    }
-
-    Timer {
-        interval: 100
-        running: true
-        repeat: true
-        onTriggered: {
-            soundIcon.running = true
-            soundNum.running = true
         }
     }
 }
