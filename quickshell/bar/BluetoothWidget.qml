@@ -473,6 +473,8 @@ FloatingWindow {
                 MouseArea {
                     anchors.fill: parent
                     hoverEnabled: true
+                    // Do not consume clicks; only track hover
+                    acceptedButtons: Qt.NoButton
                     onEntered: parent.hover = true
                     onExited: parent.hover = false
                 }
@@ -497,6 +499,8 @@ FloatingWindow {
                 MouseArea {
                     anchors.fill: parent
                     hoverEnabled: true
+                    // Do not consume clicks; only track hover
+                    acceptedButtons: Qt.NoButton
                     onEntered: parent.hover = true
                     onExited: parent.hover = false
                 }
@@ -565,6 +569,8 @@ FloatingWindow {
                                 MouseArea {
                                     anchors.fill: parent
                                     hoverEnabled: true
+                                    // Do not consume clicks; only track hover
+                                    acceptedButtons: Qt.NoButton
                                     onEntered: parent.hover = true
                                     onExited: parent.hover = false
                                 }
@@ -587,6 +593,8 @@ FloatingWindow {
                                 MouseArea {
                                     anchors.fill: parent
                                     hoverEnabled: true
+                                    // Do not consume clicks; only track hover
+                                    acceptedButtons: Qt.NoButton
                                     onEntered: parent.hover = true
                                     onExited: parent.hover = false
                                 }
@@ -609,6 +617,8 @@ FloatingWindow {
                                 MouseArea {
                                     anchors.fill: parent
                                     hoverEnabled: true
+                                    // Do not consume clicks; only track hover
+                                    acceptedButtons: Qt.NoButton
                                     onEntered: parent.hover = true
                                     onExited: parent.hover = false
                                 }
@@ -632,6 +642,8 @@ FloatingWindow {
                                 MouseArea {
                                     anchors.fill: parent
                                     hoverEnabled: true
+                                    // Do not consume clicks; only track hover
+                                    acceptedButtons: Qt.NoButton
                                     onEntered: parent.hover = true
                                     onExited: parent.hover = false
                                 }
