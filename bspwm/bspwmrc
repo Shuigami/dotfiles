@@ -50,4 +50,7 @@ bspc rule -a i3lock state=floating
 bspc rule -a "*:*:bar" state=floating border=off layer=below sticky=on manage=off rectangle=1920x50+0+0
 bspc rule -a "*:*:dmenu" state=floating border=off sticky=on center=true
 bspc rule -a "*:*:powermenu" state=floating border=off sticky=on center=true
-bspc rule -a "*:*:theme-switcher" state=floating border=off sticky=on rectangle=1000x300+460+40
+bspc rule -a "*:*:theme-switcher" state=floating border=off sticky=on rectangle=1000x300+460+1080
+bspc rule -a "*:*:bluetooth" state=floating border=off sticky=on rectangle=300x400+1610+40
+
+bspc desktop 1 -f

@@ -36,10 +36,23 @@ Rectangle {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        acceptedButtons: Qt.AllButtons;
 
-        onEntered: if (connected) bluetoothWindow.visible = true
+        onEntered: if (connected && !bluetoothWidget.visible) bluetoothWindow.visible = true
         onExited: bluetoothWindow.visible = false
-        onClicked: bluetoothToggle.running = true
+        onClicked: (mouse) => {
+            if (mouse.button === Qt.LeftButton) {
+                bluetoothToggle.running = true
+            } else if (mouse.button === Qt.RightButton) {
+                bluetoothWidget.visible = !bluetoothWidget.visible
+                if (bluetoothWidget.visible) {
+                    bluetoothWindow.visible = false
+                } else {
+                    bluetoothWindow.visible = true
+                }
+
+            }
+        }
     }
 
     Window {
@@ -74,6 +87,10 @@ Rectangle {
         }
     }
 
+    BluetoothWidget {
+        id: bluetoothWidget
+    }
+
     Process {
         id: bluetoothProcess
         command: ["hcidump", "-X"]
@@ -82,8 +99,6 @@ Rectangle {
         stdout: SplitParser {
             onRead: (data) => {
                 var line = data.trim()
-                console.log(line)
-                console.log(line.startsWith("> HCI Event"))
                 if (line.startsWith("> HCI Event")) {
                     bluetoothIcon.running = true
                     bluetoothStatus.running = true
