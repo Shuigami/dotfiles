@@ -49,7 +49,12 @@ FloatingWindow {
             snapMode: ListView.SnapToItem
 
             Component.onCompleted: {
-                const currentTheme = ThemeLoader.getTheme().name
+                const currentTheme = ThemeLoader.getTheme()
+                if (currentTheme === null || currentTheme === undefined) {
+                    return
+                } else {
+                    currentTheme = currentTheme.name
+                }
                 const m = themeList.model
                 const len = m && m.length !== undefined ? m.length : themeList.count
                 for (var i = 0; i < len; i++) {
@@ -91,7 +96,7 @@ FloatingWindow {
 
             delegate: Item {
                 width: 250
-                height: parent.height
+                implicitWidth: parent.height
 
                 property var isSelected: ThemeLoader.getTheme()?.name == modelData.name
 
@@ -195,7 +200,7 @@ FloatingWindow {
 
     Connections {
         target: root
-        onTick: {
+        function onTick() {
             themeStatusProcess.running = true;
         }
     }

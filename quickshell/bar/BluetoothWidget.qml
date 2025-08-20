@@ -9,8 +9,8 @@ import "../utils/"
 FloatingWindow {
     id: bluetoothWindow
     title: "bluetooth"
-    width: 300
-    height: 400
+    implicitWidth: 300
+    implicitHeight: 400
     visible: false
 
     color: "transparent"

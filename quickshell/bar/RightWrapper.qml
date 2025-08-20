@@ -28,5 +28,6 @@ Rectangle {
         Bluetooth {}
         Sound {}
         Light {}
+        Wifi {}
     }
 }

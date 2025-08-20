@@ -11,10 +11,7 @@ Singleton {
 
     function getTheme() {
         if (themes[currentTheme]) {
-            console.log("Current theme:", currentTheme);
             return themes[currentTheme];
-        } else {
-            console.warn("Theme not found:", currentTheme);
         }
     }
 
@@ -24,11 +21,6 @@ Singleton {
         }
 
         var names = Object.keys(themes);
-        if (names.length === 0) {
-            console.warn("No themes available");
-        } else {
-            console.log("Available themes:", names);
-        }
         return Object.values(themes);
     }
 
@@ -36,8 +28,6 @@ Singleton {
         if (themes[name]) {
             currentTheme = name;
             setThemeProcess.running = true;
-        } else {
-            console.warn("Theme not found:", name);
         }
     }
 
@@ -50,7 +40,6 @@ Singleton {
             onStreamFinished: {
                 var lines = this.text.trim().split("\n");
                 for (var i = 0; i < lines.length; i++) {
-                    console.log("Found theme:", lines[i].trim());
                     themes[lines[i].trim()] = {
                         name: lines[i].trim(),
                         path: "/home/shui/.config/themes/" + lines[i].trim()
@@ -58,11 +47,6 @@ Singleton {
                 }
 
                 getDefaultTheme.running = true;
-                if (Object.keys(themes).length === 0) {
-                    console.warn("No themes found in /home/shui/.config/themes");
-                } else {
-                    console.log("Themes loaded successfully:", Object.keys(themes));
-                }
                 loadThemes.running = false;
             }
         }

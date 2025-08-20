@@ -96,7 +96,7 @@ FloatingWindow {
 
     Connections {
         target: root
-        onTick: {
+        function onTick() {
             dmenuStatusProcess.running = true;
         }
     }

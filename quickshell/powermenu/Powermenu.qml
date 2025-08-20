@@ -151,7 +151,7 @@ FloatingWindow {
 
     Connections {
         target: root
-        onTick: {
+        function onTick() {
             powermenuStatusProcess.running = true;
         }
     }
