@@ -99,6 +99,18 @@ function setVscodeTheme(themeName) {
 	}
 }
 
+function setDunstTheme(themeName) {
+	const colors = readColors(themeName);
+	try {
+		execFileSync('sed', ['-i', `0,/foreground = .*/s//foreground = "${colors.fg}"/`, '/home/shui/.config/dunstrc']);
+		execFileSync('sed', ['-i', `0,/frame_color = .*/s//frame_color = "${colors.desactive}"/`, '/home/shui/.config/dunstrc']);
+		execFileSync('sed', ['-i', `/background = .*/s//background = "${colors.bg}"/`, '/home/shui/.config/dunstrc']);
+		execFileSync('killall', ['dunst']);
+	} catch (err) {
+		console.error('Error setting theme in dunst:', err.message);
+	}
+}
+
 function setTheme(themeName) {
 	const cfg = readConfig();
 	cfg.theme = themeName;
@@ -108,6 +120,7 @@ function setTheme(themeName) {
 	setAlacrittyTheme(themeName);
 	setBspwmTheme(themeName);
 	setVscodeTheme(themeName);
+	setDunstTheme(themeName);
 
 	return themeName;
 }
