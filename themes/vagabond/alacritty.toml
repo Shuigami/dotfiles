@@ -1,82 +1,17 @@
-[colors.bright]
-black = "#262626"        # desactive
-red = "#ff5e5e"          # red
-green = "#1e8f5a"        # green (higher contrast)
-yellow = "#e6e682"       # yellow
-blue = "#2e5973"         # hover (higher contrast)
-magenta = "#2e5973"      # fallback to hover
-cyan = "#2e5973"         # fallback to hover
-white = "#444444"        # text
-
-[colors.dim]
-black = "#262626"        # desactive
-red = "#ff5e5e"          # red
-green = "#1e8f5a"        # green (higher contrast)
-yellow = "#e6e682"       # yellow
-blue = "#2e5973"         # hover (higher contrast)
-magenta = "#2e5973"      # fallback to hover
-cyan = "#2e5973"         # fallback to hover
-white = "#444444"        # text
-
 [colors.normal]
-black = "#262626"        # desactive
-red = "#ff5e5e"          # red
-green = "#1e8f5a"        # green (higher contrast)
-yellow = "#e6e682"       # yellow
-blue = "#2e5973"         # hover (higher contrast)
-magenta = "#2e5973"      # fallback to hover
-cyan = "#2e5973"         # fallback to hover
-white = "#444444"        # text
+black = "#222222"
+blue = "#61afef"
+cyan = "#56b6c2"
+green = "#98c379"
+magenta = "#c678dd"
+red = "#e06c75"
+white = "#828791"
+yellow = "#d19a66"
+
+[colors.bright]
+black = "#5c6370"
+white = "#e6efff"
 
 [colors.primary]
-background = "#c0c0c0"   # bg
-foreground = "#111111"   # fg
-bright_foreground = "#444444" # text
-
-[colors.cursor]
-cursor = "#111111"       # fg
-text = "#c0c0c0"         # bg (inverted for visibility)
-
-[colors.selection]
-background = "#2e5973"   # hover (higher contrast)
-text = "#ffffff"         # improved contrast on dark selection
-
-[cursor.style]
-blinking = "Off"
-shape = "Underline"
-
-[font]
-size = 14
-
-[font.normal]
-family = 'FiraCode Nerd Font'
-style = 'Regular'
-
-[[keyboard.bindings]]
-action = "SpawnNewInstance"
-key = "Return"
-mods = "Super|Shift"
-
-[scrolling]
-history = 10000
-multiplier = 3
-
-[selection]
-save_to_clipboard = false
-
-[window]
-# Opacity presets from theme:
-# opacity-clear: 0x7f (~0.498)
-# opacity-normal: 0xe6 (~0.902)
-opacity = 0.902
-
-[window.class]
-general = "Alacritty"
-instance = "Alacritty"
-
-[window.padding]
-x = 15
-y = 15
-
-[general]
-live_config_reload = true
+background = "#222222"
+foreground = "#abb2bf"

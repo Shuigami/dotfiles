@@ -1,3 +1,36 @@
-general.import = [
-  "~/.config/themes/guts/alacritty.toml"
+[cursor.style]
+blinking = "Off"
+shape = "Underline"
+
+[font]
+size = 14
+
+[font.normal]
+family = 'FiraCode Nerd Font'
+style = 'Regular'
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Super|Shift"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = false
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 15
+y = 15
+
+[general]
+live_config_reload = true
+import = [
+  "~/.config/themes/space/alacritty.toml"
 ]

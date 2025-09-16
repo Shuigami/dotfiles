@@ -106,6 +106,7 @@ FloatingWindow {
                     powermenuToggleProcess.running = true;
                     powermenuCommandProcess.command = [ "bash", "-c", command ];
                     powermenuCommandProcess.running = true;
+                    powermenuWindow.selectedCell = -1;
                 }
             }
         }

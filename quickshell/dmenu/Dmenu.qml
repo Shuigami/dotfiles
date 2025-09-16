@@ -46,6 +46,7 @@ FloatingWindow {
             sequence: "Escape"
             onActivated: {
                 dmenuToggleProcess.running = true;
+                clearFilterTimer.restart();
             }
         }
 

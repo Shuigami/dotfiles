@@ -1,17 +1,17 @@
 [colors.normal]
-black = "#0b1123"
+black = "#051919"
 blue = "#61afef"
 cyan = "#56b6c2"
 green = "#98c379"
-magenta = "#c678dd"
+magenta = "#859b93"
 red = "#e06c75"
-white = "#828791"
+white = "#859b93"
 yellow = "#d19a66"
 
 [colors.bright]
-black = "#5c6370"
+black = "#546a70"
 white = "#e6efff"
 
 [colors.primary]
-background = "#0b1123"
-foreground = "#abb2bf"
+background = "#051919"
+foreground = "#859b93"

@@ -1,5 +1,5 @@
 [colors.normal]
-black = "#0b1123"
+black = "#282828"
 blue = "#61afef"
 cyan = "#56b6c2"
 green = "#98c379"
@@ -13,5 +13,5 @@ black = "#5c6370"
 white = "#e6efff"
 
 [colors.primary]
-background = "#0b1123"
+background = "#282828"
 foreground = "#abb2bf"

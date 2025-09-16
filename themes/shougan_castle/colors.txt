@@ -1,9 +1,9 @@
 opacity-clear: #7f
 opacity-normal: #f6
-fg: #a0a1a1
+fg: #969c7b
 text: #d0d0d0
-bg: #222222
-desactive: #434547
+bg: #252321
+desactive: #4c5346
 hover: #636567
 red: #ff5e5e
 red-bg: #662525

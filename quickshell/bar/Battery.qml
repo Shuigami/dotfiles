@@ -84,6 +84,7 @@ Rectangle {
             onRead: (data) => {
                 batteryNum.running = true
                 batteryIcon.running = true
+                batteryStatus.running = true
             }
         }
     }

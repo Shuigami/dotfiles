@@ -70,8 +70,18 @@ function setWallpaper(themeName) {
 function setAlacrittyTheme(themeName) {
 	const alacrittyConfigPath = path.join(process.env.HOME || '/home/shui', '.config', 'alacritty', 'alacritty.toml');
 	try {
-		const newConfig = "general.import = [\n  \"~/.config/themes/" + themeName + "/alacritty.toml\"\n]";
-		fs.writeFileSync(alacrittyConfigPath, newConfig);
+		let config = '';
+		if (fs.existsSync(alacrittyConfigPath)) {
+			config = fs.readFileSync(alacrittyConfigPath, 'utf8');
+		}
+		
+		const importLine = `import = [\n  "~/.config/themes/${themeName}/alacritty.toml"\n]`;
+
+		config = config.replace(/import\s*=\s*\[[\s\S]*?\]/g, '');
+		
+		config = config.trim() + '\n' + importLine;
+		
+		fs.writeFileSync(alacrittyConfigPath, config);
 	} catch (err) {
 		console.error('Error setting theme in alacritty:', err.message);
 	}
