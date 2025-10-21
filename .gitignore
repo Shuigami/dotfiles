@@ -7,6 +7,7 @@
 !README.md
 !pavucontrol.ini
 !picom.conf
+!picom-animations.conf
 !dunstrc
 
 # Directories to keep in the .config directory
