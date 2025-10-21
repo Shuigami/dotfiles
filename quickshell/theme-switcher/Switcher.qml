@@ -49,18 +49,23 @@ FloatingWindow {
             snapMode: ListView.SnapToItem
 
             Component.onCompleted: {
+                if (ThemeLoader.themesLoaded) {
+                    positionToCurrentTheme();
+                }
+            }
+
+            function positionToCurrentTheme() {
                 const currentTheme = ThemeLoader.getTheme()
                 if (currentTheme === null || currentTheme === undefined) {
                     return
-                } else {
-                    currentTheme = currentTheme.name
                 }
+                const currentThemeName = currentTheme.name
                 const m = themeList.model
                 const len = m && m.length !== undefined ? m.length : themeList.count
                 for (var i = 0; i < len; i++) {
                     const item = m && m.length !== undefined ? m[i] : null
                     const name = item ? item.name : null
-                    if (name === currentTheme) {
+                    if (name === currentThemeName) {
                         themeList.currentIndex = i
                         themeList.positionViewAtIndex(i, ListView.Center)
                         break
@@ -137,6 +142,13 @@ FloatingWindow {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                 }
+            }
+        }
+
+        Connections {
+            target: ThemeLoader
+            function onThemeLoadingCompleted() {
+                themeList.positionToCurrentTheme();
             }
         }
     }

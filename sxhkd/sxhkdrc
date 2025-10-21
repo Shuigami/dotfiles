@@ -56,7 +56,7 @@ super + p
 
 # lock screen
 super + shift + p
-	~/.config/i3/scripts/lock.sh -- maim
+	slock
 
 # split horizontal
 super + h

@@ -2,11 +2,12 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 import QtQuick.Controls
+import Qt5Compat.GraphicalEffects
 import "../utils"
 
 FloatingWindow {
     id: powermenuWindow
-    implicitWidth: 1000
+    implicitWidth: 1250
     implicitHeight: 300
     visible: false
 
@@ -15,10 +16,11 @@ FloatingWindow {
 
     property int selectedCell: -1
     property var options: [
-        { icon: "󰐥", name: "Turn Off", offset: -1, command: "systemctl poweroff" },
-        { icon: "󰆷", name: "Restart", offset: -10, command: "systemctl reboot" },
-        { icon: "󰤄", name: "Sleep", offset: 0, command: "amixer set Master mute && ~/.config/i3/scripts/lock.sh && systemctl suspend" },
-        { icon: "󰗼", name: "Log Out", offset: -5, command: "bspc quit" }
+        { icon: "assets/sleep.png", name: "Sleep", offsetX: 2, offsetY: 0, scale: 0.84, command: "amixer set Master mute && systemctl suspend && slock" },
+        { icon: "assets/refresh.png", name: "Restart", offsetX: 0, offsetY: -3, scale: 0.95, command: "systemctl reboot" },
+        { icon: "assets/power.png", name: "Turn Off", offsetX: 0, offsetY: -1, scale: 0.95, command: "systemctl poweroff" },
+        { icon: "assets/logout.png", name: "Log Out", offsetX: 9, offsetY: 3, scale: 1.0, command: "bspc quit" },
+        { icon: "assets/padlock.png", name: "Lock", offsetX: 0, offsetY: -3, scale: 0.9, command: "slock" },
     ]
 
     Rectangle {
@@ -63,17 +65,26 @@ FloatingWindow {
                     radius: 10
                 }
 
-                Text {
+                Image {
+                    id: iconImage
                     anchors.centerIn: parent
-                    anchors.horizontalCenterOffset: options[index].offset
-                    text: options[index].icon
+                    anchors.horizontalCenterOffset: options[index].offsetX
+                    anchors.verticalCenterOffset: options[index].offsetY
+                    source: options[index].icon
+                    width: 80 * options[index].scale
+                    height: 80 * options[index].scale
+                    fillMode: Image.PreserveAspectFit
+                    visible: false
+                }
+
+                ColorOverlay {
+                    anchors.centerIn: parent
+                    anchors.horizontalCenterOffset: options[index].offsetX
+                    anchors.verticalCenterOffset: options[index].offsetY
+                    width: 80 * options[index].scale
+                    height: 80 * options[index].scale
+                    source: iconImage
                     color: isSelected ? ColorLoader.getColor("bg") : ColorLoader.getColor("fg")
-                    font.pixelSize: 80
-                    font.family: "Rubik"
-                    font.weight: Font.Medium
-                    elide: Text.ElideRight
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
                 }
             }
         }

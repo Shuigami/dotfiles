@@ -8,6 +8,9 @@ Singleton {
     id: themeLoader
     property var currentTheme: ""
     property var themes: ({})
+    property bool themesLoaded: false
+    
+    signal themeLoadingCompleted()
 
     function getTheme() {
         if (themes[currentTheme]) {
@@ -62,7 +65,10 @@ Singleton {
                 var json = JSON.parse(this.text);
                 if (json.theme) {
                     themeLoader.setTheme(json.theme);
+                    console.log("Default theme:", json.theme);
                 }
+                themeLoader.themesLoaded = true;
+                themeLoader.themeLoadingCompleted();
             }
         }
     }
