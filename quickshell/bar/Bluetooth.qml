@@ -42,48 +42,8 @@ Rectangle {
         onExited: bluetoothWindow.visible = false
         onClicked: (mouse) => {
             if (mouse.button === Qt.LeftButton) {
-                bluetoothToggle.running = true
-            } else if (mouse.button === Qt.RightButton) {
                 bluetoothWidget.visible = !bluetoothWidget.visible
-                if (bluetoothWidget.visible) {
-                    bluetoothWindow.visible = false
-                } else {
-                    bluetoothWindow.visible = true
-                }
-
             }
-        }
-    }
-
-    Window {
-        id: bluetoothWindow
-        visible: false
-        flags: Qt.ToolTip | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
-        color: "transparent"
-
-        x: icon.mapToGlobal(0, 0).x + (icon.width - tooltip.width) / 2
-        y: parent.mapToGlobal(0, 0).y + parent.height + 5
-
-        width: popupText.implicitWidth + 20
-        height: popupText.implicitHeight + 16
-
-        Rectangle {
-            id: tooltip
-            anchors.fill: parent
-            color: ColorLoader.getColor("bg")
-            border.color: ColorLoader.getColor("fg")
-            border.width: 1
-            radius: 6
-        }
-
-        Text {
-            id: popupText
-            anchors.centerIn: parent
-            text: bluetoothName
-            color: ColorLoader.getColor("fg")
-            font.family: "Rubik"
-            font.pixelSize: 12
-            font.weight: Font.Medium
         }
     }
 
@@ -118,18 +78,6 @@ Rectangle {
     }
 
     Process {
-        id: bluetoothToggle
-        command: ["/home/shui/.config/quickshell/script/bluetooth.sh", "toggle"]
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                let lines = this.text.trim().split("\n")
-                if (lines[lines.length - 1] === "off") bluetoothWindow.visible = false
-            }
-        }
-    }
-
-    Process {
         id: bluetoothStatus
         command: ["/home/shui/.config/quickshell/script/bluetooth.sh", "status"]
         running: true
@@ -144,16 +92,6 @@ Rectangle {
                     bluetoothNameProc.running = true
                 }
             }
-        }
-    }
-
-    Process {
-        id: bluetoothNameProc
-        command: ["/home/shui/.config/quickshell/script/bluetooth.sh", "name"]
-        running: true
-
-        stdout: StdioCollector {
-            onStreamFinished: bluetoothName = this.text.trim()
         }
     }
 }
